@@ -4,17 +4,19 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from '../consts/colors'
 import { styleText } from '../styles/main'
-import BlinkingText from '../components/BlinkingText'
+import BlinkingEffect from '../components/BlinkingEffect'
+import WritingEffect from '../components/WritingEffect'
 
 export default function Home() {
+	const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"]
 	return (
 		<View style={styles.container}>
 			<Text style={styles.textStyle}>Hello World, Im Justal Kevin</Text>
-			<Text style={styles.textStyle}>Im a Fullstack Developer</Text>
+			<WritingEffect predata="Im a" data={jobs}></WritingEffect>
 			<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
-			<BlinkingText>
+			<BlinkingEffect>
 				<Text style={styles.intructions}>Press the screen</Text>
-			</BlinkingText>
+			</BlinkingEffect>
 			<StatusBar style="auto" hidden />
 		</View>
 	);
@@ -30,6 +32,11 @@ const styles = StyleSheet.create({
 	textStyle: {
 		fontSize: 15,
 		color: colors.cyan
+	},
+	textCursor: {
+		borderRightWidth: 2,
+		borderColor: colors.white,
+		color: colors.white
 	},
 	intructions: {
 		...styleText.blinking,

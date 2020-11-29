@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Animated, View } from 'react-native';
 
-export default BlinkingText = (props) => {
+export default BlinkingEffect = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current
 
   React.useEffect(() => {
@@ -24,10 +24,10 @@ export default BlinkingText = (props) => {
   }, [fadeAnim])
 
   return (
-    <Animated.View                 // Special animatable View
+    <Animated.View
       style={{
         ...props.style,
-        opacity: fadeAnim,         // Bind opacity to animated value
+        opacity: fadeAnim,
       }}
     >
       {props.children}
