@@ -5,19 +5,22 @@ import { colors } from '../consts/colors'
 export default WritingEffect = (props) => {
 	const [fullText, setFullText] = useState("");
 	const [startAnimation, setStartAnimation] = useState(true);
+	const [indexArray, setIndexArray] = useState(0);
 
-	function writing(actualText) {
+	function writing(actualText, indexActualArray) {
 		const i = actualText.length;
-		if (i < props.data.length) {
-			const newFullText = actualText  + props.data.charAt(i);
+		if (i < props.data[indexActualArray].length) {
+			const newFullText = actualText  + props.data[indexActualArray].charAt(i);
 			setFullText(newFullText);
 			setTimeout(function() {
-				writing(newFullText)
+				writing(newFullText, indexActualArray)
 			}, 100);
 		} else {
 			setTimeout(function() {
+				const newIndexArray = (indexActualArray + 1)%props.data.length
+				setIndexArray(newIndexArray);
 				setFullText("");
-				writing("");
+				writing("", newIndexArray);
 			}, 1000);
 		}
 	}
@@ -25,7 +28,7 @@ export default WritingEffect = (props) => {
 	if(startAnimation) {
 		setStartAnimation(false);
 		setTimeout(function() {
-			writing(fullText)
+			writing(fullText, indexArray)
 		}, 100);
 	}
 
