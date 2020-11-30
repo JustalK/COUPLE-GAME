@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '../consts/colors'
+import { colors } from '../styles/colors'
 
 export default WritingEffect = (props) => {
 	const [fullText, setFullText] = useState("");
@@ -14,7 +14,7 @@ export default WritingEffect = (props) => {
 			setFullText(newFullText);
 			setTimeout(function() {
 				writing(newFullText, indexActualArray)
-			}, 100);
+			}, 30);
 		} else {
 			setTimeout(function() {
 				const newIndexArray = (indexActualArray + 1)%props.data.length
@@ -33,17 +33,16 @@ export default WritingEffect = (props) => {
 	}
 
 	return (
-    <View
-      	style={{
-        	...props.style
-      	}}>
-      	<Text style={styles.text}>{props.predata} {fullText}</Text>
+    <View>
+      	<Text style={props.style}>{props.predata} <Text style={{...props.style, ...styles.textStyle}}>{fullText}</Text></Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-	text: {
+	textStyle: {
+		borderRightWidth: 2,
+		borderColor: colors.white,
 		color: colors.white
 	}
 });
