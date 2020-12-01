@@ -13,6 +13,7 @@ export const styleText = {
 export const styleMain = {
 	container: {
 		flex: 1,
+		flexDirection: 'row',
 		backgroundColor: colors.darkBlue,
 		alignItems: "center",
 		justifyContent: "center",

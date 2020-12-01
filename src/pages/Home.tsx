@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, Image, View, TouchableHighlight } from "react-native";
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
+import profileImg from '../../assets/me.jpeg'
 
 export default function Home(props) {
 	const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
@@ -16,6 +17,10 @@ export default function Home(props) {
 	return (
 		<TouchableHighlight onPress={goToPortfolio} style={styleMain.container}>
 			<View style={styles.home}>
+				<Image
+					style={styles.portrait}
+					source={profileImg}
+				/>
 				<Text style={styles.textStyle}>Hello World, Im Justal Kevin</Text>
 				<WritingEffect style={styles.textStyle} predata="Im a" data={jobs}></WritingEffect>
 				<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
@@ -34,6 +39,15 @@ const styles = StyleSheet.create({
 		fontFamily: "LatoLight",
 		textAlign: "center",
 		color: colors.cyan
+	},
+	portrait: {
+		width: 200,
+		height: 200,
+		alignSelf: "center",
+		marginBottom: 50,
+		borderRadius: 200,
+		borderWidth: 1,
+		borderColor: colors.cyan
 	},
 	textCursor: {
 		borderRightWidth: 2,
