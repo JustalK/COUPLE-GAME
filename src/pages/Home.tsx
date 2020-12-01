@@ -17,7 +17,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 	render = () => {
 		return (
 			<TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} style={styleMain.homeContainer}>
-				<View style={styles.home}>
+				<View>
 					<Image
 						style={styles.portrait}
 						source={profileImg}

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from 'react';
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ViewStyle } from "react-native";
 import { styleText, styleMain } from '../styles/main'
 import { colors } from '../styles/colors'
 import ApiPage from '../services/ApiPage'
