@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../styles/colors'
+import {WrittingEffectProps, WrittingEffectStates} from '../interfaces/WrittingEffect'
 
-export default class WritingEffect extends Component {
-	constructor(props) {
+export default class WritingEffect extends Component<WrittingEffectProps, WrittingEffectStates> {
+	constructor(props: WrittingEffectProps) {
 		super(props)
 		this.state = {
 			fullText: "",
@@ -17,7 +18,7 @@ export default class WritingEffect extends Component {
 		}, 100);
 	}
 
-	writing(actualText, indexActualArray) {
+	writing(actualText: string, indexActualArray: number) {
 		const i = actualText.length;
 		if (i < this.props.data[indexActualArray].length) {
 			const newFullText = actualText  + this.props.data[indexActualArray].charAt(i);

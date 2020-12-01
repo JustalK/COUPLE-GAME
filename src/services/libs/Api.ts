@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { ApiDataProps } from '../../interfaces/Api'
 
 export default class Api extends Component {
 
@@ -7,7 +8,7 @@ export default class Api extends Component {
 		return axios.get(url);
 	}
 
-	static success = (response) => {
+	static success: any = (response: ApiDataProps) => {
 		return response.data;
 	}
 }

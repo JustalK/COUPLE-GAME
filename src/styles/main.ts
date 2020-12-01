@@ -11,11 +11,17 @@ export const styleText = {
 }
 
 export const styleMain = {
-	container: {
+	homeContainer: {
 		flex: 1,
-		flexDirection: 'row',
+		flexDirection: 'column',
 		backgroundColor: colors.darkBlue,
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	pageContainer: {
+		flex: 1,
+		flexDirection: 'column',
+		padding: 20,
+		backgroundColor: colors.darkBlue
 	}
 }

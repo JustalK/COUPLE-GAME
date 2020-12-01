@@ -6,16 +6,17 @@ import { styleText, styleMain } from '../styles/main'
 import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
 import profileImg from '../../assets/me.jpeg'
+import {HomeProps, HomeStates} from '../interfaces/Home'
 
 const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
-export default class Home extends Component {
-	constructor(props) {
+export default class Home extends Component<HomeProps, HomeStates> {
+	constructor(props: HomeProps) {
 		super(props);
 	}
 
 	render = () => {
 		return (
-			<TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} style={styleMain.container}>
+			<TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} style={styleMain.homeContainer}>
 				<View style={styles.home}>
 					<Image
 						style={styles.portrait}

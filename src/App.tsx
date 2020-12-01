@@ -9,8 +9,8 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Animated } from "react-native";
 import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
-import { colors } from './consts/colors'
 import * as Font from 'expo-font';
+import {AppProps, AppStates} from './interfaces/App'
 
 const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   const progress = Animated.add(
@@ -56,8 +56,8 @@ const customFonts = {
 	Heebo: require('../assets/fonts/Heebo-Bold.ttf')
 };
 
-export default class App extends Component {
-	constructor(props) {
+export default class App extends Component<AppProps, AppStates> {
+	constructor(props: AppProps) {
 		super(props);
 		this.state = {
 			fontsLoaded: false
