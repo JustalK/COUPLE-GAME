@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { Component } from "react";
 import { StyleSheet, Text, Image, View, TouchableHighlight } from "react-native";
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
@@ -7,30 +7,31 @@ import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
 import profileImg from '../../assets/me.jpeg'
 
-export default function Home(props) {
-	const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
+const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
+export default class Home extends Component {
+	constructor(props) {
+		super(props);
+	}
 
-	  const goToPortfolio = () => {
-		  props.navigation.navigate('Portfolio')
-	  }
-
-	return (
-		<TouchableHighlight onPress={goToPortfolio} style={styleMain.container}>
-			<View style={styles.home}>
-				<Image
-					style={styles.portrait}
-					source={profileImg}
-				/>
-				<Text style={styles.textStyle}>Hello World, Im Justal Kevin</Text>
-				<WritingEffect style={styles.textStyle} predata="Im a" data={jobs}></WritingEffect>
-				<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
-				<BlinkingEffect>
-					<Text style={styles.intructions}>Press the screen</Text>
-				</BlinkingEffect>
-				<StatusBar style="auto" hidden />
-			</View>
-		</TouchableHighlight>
-	);
+	render = () => {
+		return (
+			<TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} style={styleMain.container}>
+				<View style={styles.home}>
+					<Image
+						style={styles.portrait}
+						source={profileImg}
+					/>
+					<Text style={styles.textStyle}>Hello World, Im Justal Kevin</Text>
+					<WritingEffect style={styles.textStyle} predata="Im a" data={jobs}></WritingEffect>
+					<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
+					<BlinkingEffect>
+						<Text style={styles.intructions}>Press the screen</Text>
+					</BlinkingEffect>
+					<StatusBar style="auto" hidden />
+				</View>
+			</TouchableHighlight>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

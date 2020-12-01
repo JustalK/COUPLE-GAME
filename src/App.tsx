@@ -5,12 +5,12 @@ import { createStackNavigator, TransitionSpecs, HeaderStyleInterpolators } from 
 const Stack = createStackNavigator();
 
 import { registerRootComponent } from 'expo';
-import React from "react";
-import { StyleSheet, View, Animated } from "react-native";
+import React, { Component } from "react";
+import { StyleSheet, View, Text, Animated } from "react-native";
 import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
 import { colors } from './consts/colors'
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 
 const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   const progress = Animated.add(
@@ -50,28 +50,42 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   };
 };
 
-export default function App() {
-	const [loaded] = useFonts({
-		LatoRegular: require('../assets/fonts/Lato-Regular.ttf'),
-		LatoLight: require('../assets/fonts/Lato-Light.ttf'),
-		Heebo: require('../assets/fonts/Heebo-Bold.ttf'),
-	  });
+const customFonts = {
+	LatoRegular: require('../assets/fonts/Lato-Regular.ttf'),
+	LatoLight: require('../assets/fonts/Lato-Light.ttf'),
+	Heebo: require('../assets/fonts/Heebo-Bold.ttf')
+};
 
-	  if (!loaded) {
-		return null;
-	  }
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			fontsLoaded: false
+		};
+	}
 
-	return (
-		<NavigationContainer>
-			<Stack.Navigator>
-	  			<Stack.Screen
-					name="Home"
-					component={Home}
-					options={{ title: 'Welcome', headerShown: false, cardStyleInterpolator: forSlide }} />
-				<Stack.Screen name="Portfolio" component={Portfolio} options={{headerShown: false, cardStyleInterpolator: forSlide}} />
-			</Stack.Navigator>
-		</NavigationContainer>
-	);
+	async componentDidMount() {
+		await Font.loadAsync(customFonts);
+    	this.setState({ fontsLoaded: true });
+	}
+
+	render = () => {
+		if (this.state.fontsLoaded) {
+			return (
+				<NavigationContainer>
+					<Stack.Navigator>
+			  			<Stack.Screen
+							name="Home"
+							component={Home}
+							options={{ title: 'Welcome', headerShown: false, cardStyleInterpolator: forSlide }} />
+						<Stack.Screen name="Portfolio" component={Portfolio} options={{headerShown: false, cardStyleInterpolator: forSlide}} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			)
+		} else {
+			return (<Text>Loading</Text>)
+		}
+	};
 }
 
 registerRootComponent(App);
