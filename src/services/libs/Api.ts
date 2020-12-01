@@ -6,4 +6,8 @@ export default class Api extends Component {
 	static get = (url: string) => {
 		return axios.get(url);
 	}
+
+	static success = (response) => {
+		return response.data;
+	}
 }

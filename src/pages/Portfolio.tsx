@@ -9,7 +9,9 @@ export default class Portfolio extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			informations: []
+			informations: {
+				title: 'Loading'
+			}
 		};
     }
 
@@ -19,13 +21,13 @@ export default class Portfolio extends Component {
 
 	async getPageInformations() {
 		const infos = await ApiPage.getPortfolioInformation();
-		this.setState({informations: infos})
+		this.setState({informations: infos[0]})
 	}
 
 	render = () => {
 		return (
 			<View style={styleMain.container}>
-				<Text style={styleText.textStyle}>Test</Text>
+				<Text style={styleText.textStyle}>{this.state.informations.title}</Text>
 			</View>
 		)
 	};
