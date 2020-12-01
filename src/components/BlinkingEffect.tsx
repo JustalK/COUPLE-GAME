@@ -1,36 +1,47 @@
-import React, { useRef, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Animated, View } from 'react-native';
 
-export default BlinkingEffect = (props) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current
+export default class BlinkingEffect extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			fadeValue: new Animated.Value(0)
+		};
+	}
 
-  React.useEffect(() => {
-	Animated.loop(
-		Animated.sequence([
-			Animated.timing(fadeAnim,
-	      	{
-	        	toValue: 1,
-	        	duration: 500,
-				useNativeDriver: true
-	      	}),
-			Animated.timing(fadeAnim,
-	      	{
-	        	toValue: 0,
-	        	duration: 1200,
-				useNativeDriver: true
-	      	})
-	  	])
-	  ).start();
-  }, [fadeAnim])
+	componentDidMount() {
+		this.fadeAnim();
+ 	}
 
-  return (
-    <Animated.View
-      style={{
-        ...props.style,
-        opacity: fadeAnim,
-      }}
-    >
-      {props.children}
-    </Animated.View>
-  );
+	fadeAnim() {
+		Animated.loop(
+			Animated.sequence([
+				Animated.timing(this.state.fadeValue,
+		      	{
+		        	toValue: 1,
+		        	duration: 500,
+					useNativeDriver: true
+		      	}),
+				Animated.timing(this.state.fadeValue,
+		      	{
+		        	toValue: 0,
+		        	duration: 1200,
+					useNativeDriver: true
+		      	})
+		  	])
+		  ).start();
+	}
+
+	render = () => {
+	  return (
+	    <Animated.View
+	      style={{
+	        ...this.props.style,
+	        opacity: this.state.fadeValue,
+	      }}
+	    >
+	      {this.props.children}
+	    </Animated.View>
+	  );
+	}
 }

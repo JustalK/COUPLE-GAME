@@ -1,42 +1,49 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../styles/colors'
 
-export default WritingEffect = (props) => {
-	const [fullText, setFullText] = useState("");
-	const [startAnimation, setStartAnimation] = useState(true);
-	const [indexArray, setIndexArray] = useState(0);
+export default class WritingEffect extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			fullText: "",
+			indexArray: 0
+		}
+	}
 
-	function writing(actualText, indexActualArray) {
+	componentDidMount() {
+		setTimeout(() => {
+			this.writing(this.state.fullText, this.state.indexArray)
+		}, 100);
+	}
+
+	writing(actualText, indexActualArray) {
 		const i = actualText.length;
-		if (i < props.data[indexActualArray].length) {
-			const newFullText = actualText  + props.data[indexActualArray].charAt(i);
-			setFullText(newFullText);
-			setTimeout(function() {
-				writing(newFullText, indexActualArray)
+		if (i < this.props.data[indexActualArray].length) {
+			const newFullText = actualText  + this.props.data[indexActualArray].charAt(i);
+			this.setState({fullText: newFullText})
+			setTimeout(() => {
+				this.writing(newFullText, indexActualArray)
 			}, 30);
 		} else {
-			setTimeout(function() {
-				const newIndexArray = (indexActualArray + 1)%props.data.length
-				setIndexArray(newIndexArray);
-				setFullText("");
-				writing("", newIndexArray);
+			setTimeout(() => {
+				const newIndexArray = (indexActualArray + 1) % this.props.data.length
+				this.setState({
+					indexArray: newIndexArray,
+					fullText: ""
+				})
+				this.writing("", newIndexArray);
 			}, 1000);
 		}
 	}
 
-	if(startAnimation) {
-		setStartAnimation(false);
-		setTimeout(function() {
-			writing(fullText, indexArray)
-		}, 100);
+	render = () => {
+		return (
+			<View>
+				<Text style={this.props.style}>{this.props.predata} <Text style={{...this.props.style, ...styles.textStyle}}>{this.state.fullText}</Text></Text>
+			</View>
+		);
 	}
-
-	return (
-    <View>
-      	<Text style={props.style}>{props.predata} <Text style={{...props.style, ...styles.textStyle}}>{fullText}</Text></Text>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({
