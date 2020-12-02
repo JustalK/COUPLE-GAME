@@ -3,7 +3,7 @@ import {StyleProp, ViewStyle} from 'react-native';
 import React from "react";
 
 export interface BlinkingEffectProps {
-	style: ViewStyle,
+	style?: StyleProp<ViewStyle>,
 	children: React.ReactNode
 }
 

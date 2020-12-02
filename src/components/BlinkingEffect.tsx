@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Animated, View } from 'react-native';
+import React, { Component, useRef } from 'react';
+import { Animated, View, StyleProp, ViewStyle } from 'react-native';
 import {BlinkingEffectProps, BlinkingEffectStates} from '../interfaces/BlinkingEffect';
 
 export default class BlinkingEffect extends Component<BlinkingEffectProps, BlinkingEffectStates> {
@@ -34,12 +34,11 @@ export default class BlinkingEffect extends Component<BlinkingEffectProps, Blink
 	}
 
 	render = () => {
+	  const opacity = {opacity: this.state.fadeValue};
+
 	  return (
 	    <Animated.View
-	      style={{
-	        ...this.props.style,
-	        opacity: this.state.fadeValue,
-	      }}
+	      style={[this.props.style as {}, opacity]}
 	    >
 	      {this.props.children}
 	    </Animated.View>

@@ -1,7 +1,7 @@
 // For Navigation purpose
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, TransitionSpecs, HeaderStyleInterpolators } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator, TransitionSpecs, HeaderStyleInterpolators, StackCardInterpolationProps} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 import { registerRootComponent } from 'expo';
@@ -12,7 +12,7 @@ import Portfolio from './pages/Portfolio'
 import * as Font from 'expo-font';
 import {AppProps, AppStates} from './interfaces/App'
 
-const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
+const forSlide = ({ current, next, inverted, layouts: { screen } }: StackCardInterpolationProps) => {
   const progress = Animated.add(
     current.progress.interpolate({
       inputRange: [0, 1],

@@ -41,7 +41,7 @@ export default class WritingEffect extends Component<WrittingEffectProps, Writti
 	render = () => {
 		return (
 			<View>
-				<Text style={this.props.style}>{this.props.predata} <Text style={{...this.props.style, ...styles.textStyle}}>{this.state.fullText}</Text></Text>
+				<Text style={this.props.style as {}}>{this.props.predata} <Text style={{...this.props.style as {}, ...styles.textStyle}}>{this.state.fullText}</Text></Text>
 			</View>
 		);
 	}

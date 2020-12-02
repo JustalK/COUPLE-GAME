@@ -23,7 +23,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 						source={profileImg}
 					/>
 					<Text style={styles.textStyle}>Hello World, Im Justal Kevin</Text>
-					<WritingEffect style={styles.textStyle} predata="Im a" data={jobs}></WritingEffect>
+					<WritingEffect style={styles.textStyle as {}} predata="Im a" data={jobs}></WritingEffect>
 					<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
 					<BlinkingEffect>
 						<Text style={styles.intructions}>Press the screen</Text>
