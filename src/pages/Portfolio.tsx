@@ -69,14 +69,14 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 
 const styles = StyleSheet.create({
 	title: {
-		marginTop: 50,
+		marginTop: 40,
 		fontSize: 50,
 		fontWeight: "bold",
 		fontFamily: "LatoLight",
 		textAlign: "center",
 		color: colors.white,
 		textTransform: "uppercase",
-		marginBottom: 20
+		marginBottom: 40
 	},
 	description: {
 		fontSize: 20,
@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		color: colors.cyan,
 		alignSelf: 'flex-start',
-		marginBottom: 20
+		marginBottom: 50
 	},
 });
