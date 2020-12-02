@@ -3,6 +3,7 @@ import React, { useState, Component } from 'react';
 import { Text, View, StyleSheet, ViewStyle } from "react-native";
 import { styleText, styleMain } from '../styles/main'
 import { colors } from '../styles/colors'
+import Project from '../components/Project'
 import ApiPage from '../services/ApiPage'
 import ApiProject from '../services/ApiProject'
 import {PagesInformationProps} from '../interfaces/Pages'
@@ -16,8 +17,8 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 			informations: {
 				title: 'Loading',
 				description: 'Loading',
-				projects: []
-			}
+			},
+			projects: []
 		};
     }
 
@@ -42,6 +43,9 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 			<View style={styleMain.pageContainer}>
 				<Text style={styles.title}>{this.state.informations.title}</Text>
 				<Text style={styles.description}>{this.state.informations.description}</Text>
+				{this.state.projects.map((project, index) => {
+					return <Project key={index}></Project>;
+				})}
 			</View>
 		)
 	};
