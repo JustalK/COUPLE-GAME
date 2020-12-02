@@ -4,7 +4,9 @@ import { Text, View, StyleSheet, ViewStyle } from "react-native";
 import { styleText, styleMain } from '../styles/main'
 import { colors } from '../styles/colors'
 import ApiPage from '../services/ApiPage'
+import ApiProject from '../services/ApiProject'
 import {PagesInformationProps} from '../interfaces/Pages'
+import {ProjectsInformationProps} from '../interfaces/Projects'
 import {PortfolioProps, PortfolioStates} from '../interfaces/Portfolio'
 
 export default class Portfolio extends Component<PortfolioProps, PortfolioStates> {
@@ -13,18 +15,26 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		this.state = {
 			informations: {
 				title: 'Loading',
-				description: 'Loading'
+				description: 'Loading',
+				projects: []
 			}
 		};
     }
 
 	async componentDidMount() {
 		await this.getPageInformations();
+		await this.getProjectsInformations();
 	}
 
 	async getPageInformations() {
 		const infos: PagesInformationProps[] = await ApiPage.getPortfolioInformation();
 		this.setState({informations: infos[0]})
+	}
+
+	async getProjectsInformations() {
+		const infos: ProjectsInformationProps[] = await ApiProject.getProject();
+		this.setState({projects: infos})
+		console.log(infos);
 	}
 
 	render = () => {
