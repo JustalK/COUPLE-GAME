@@ -22,7 +22,9 @@ export const styleMain = StyleSheet.create({
 	pageContainer: {
 		flex: 1,
 		flexDirection: "column",
-		padding: 20,
 		backgroundColor: colors.darkBlue
+	},
+	pagePadding: {
+		padding: 20
 	}
 })

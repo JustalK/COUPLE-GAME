@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Animated, Button } from "react-native";
 import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
+import HeaderTitle from './components/HeaderTitle'
 import * as Font from 'expo-font';
 import {AppProps, AppStates} from './interfaces/App'
 import { colors } from './styles/colors'
@@ -79,33 +80,8 @@ export default class App extends Component<AppProps, AppStates> {
 			  			<Stack.Screen
 							name="Home"
 							component={Home}
-							options={{ title: 'Welcome', headerShown: false, cardStyleInterpolator: forSlide }} />
-						<Stack.Screen name="Portfolio" component={Portfolio} options={{
-							headerStyle: {
-								backgroundColor: colors.clearBlue
-							},
-							headerLeft: () => (
-								<Button
-									onPress={() => alert('This is a button!')}
-									title="Info"
-									color="#fff"
-								/>
-							),
-							headerTitle: () => (
-								<Button
-									onPress={() => alert('This is a button!')}
-									title="Info"
-									color="#fff"
-								/>
-							),
-							headerRight: () => (
-								<Button
-									onPress={() => alert('This is a button!')}
-              						title="Info"
-              						color="#fff"
-								/>
-							),
-							cardStyleInterpolator: forSlide}} />
+							options={{headerShown: false, cardStyleInterpolator: forSlide }} />
+						<Stack.Screen name="Portfolio" component={Portfolio} options={{headerShown: false, cardStyleInterpolator: forSlide}} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			)

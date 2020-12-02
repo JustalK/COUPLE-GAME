@@ -28,7 +28,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 					<BlinkingEffect>
 						<Text style={styles.intructions}>Press the screen</Text>
 					</BlinkingEffect>
-					<StatusBar style="auto" hidden />
+					<StatusBar style="auto" hidden={false} />
 				</View>
 			</TouchableHighlight>
 		);
