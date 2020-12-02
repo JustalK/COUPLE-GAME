@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from 'react';
-import { Text, View, StyleSheet, ViewStyle } from "react-native";
+import { Text, ScrollView, StyleSheet, ViewStyle } from "react-native";
 import { styleText, styleMain } from '../styles/main'
 import { colors } from '../styles/colors'
 import Project from '../components/Project'
@@ -18,13 +18,14 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 				title: 'Loading',
 				description: 'Loading',
 			},
-			projects: []
+			projects: [],
+			page: 0
 		};
     }
 
 	async componentDidMount() {
 		await this.getPageInformations();
-		await this.getProjectsInformations();
+		await this.getProjectsInformations(0);
 	}
 
 	async getPageInformations() {
@@ -32,21 +33,30 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		this.setState({informations: infos[0]})
 	}
 
-	async getProjectsInformations() {
-		const infos: ProjectsInformationProps[] = await ApiProject.getProject();
-		this.setState({projects: infos})
-		console.log(infos);
+	async getProjectsInformations(page: number) {
+		const projects: ProjectsInformationProps[] = await ApiProject.getProject(page);
+		this.setState({projects: [...this.state.projects, ...projects], page: page});
 	}
+
+	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
+		return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+	};
+
 
 	render = () => {
 		return (
-			<View style={styleMain.pageContainer}>
+			<ScrollView onScroll={({ nativeEvent }) => {
+	            if (this.isGoingDown(nativeEvent)) {
+					const nextPage = this.state.page + 1;
+					this.getProjectsInformations(nextPage);
+	            }
+	          }} style={styleMain.pageContainer}>
 				<Text style={styles.title}>{this.state.informations.title}</Text>
 				<Text style={styles.description}>{this.state.informations.description}</Text>
 				{this.state.projects.map((project, index) => {
-					return <Project key={index}></Project>;
+					return <Project image={project.images[0].path} title={project.title} key={index}></Project>;
 				})}
-			</View>
+			</ScrollView>
 		)
 	};
 }
@@ -59,14 +69,15 @@ const styles = StyleSheet.create({
 		fontFamily: "LatoLight",
 		textAlign: "center",
 		color: colors.white,
-		textTransform: "uppercase"
+		textTransform: "uppercase",
+		marginBottom: 20
 	},
 	description: {
-		marginTop: 20,
 		fontSize: 20,
 		fontFamily: "LatoLight",
 		textAlign: "center",
 		color: colors.cyan,
-		alignSelf: 'flex-start'
+		alignSelf: 'flex-start',
+		marginBottom: 20
 	},
 });

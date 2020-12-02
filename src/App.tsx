@@ -52,6 +52,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }: StackCardInt
 
 const customFonts = {
 	LatoRegular: require('../assets/fonts/Lato-Regular.ttf'),
+	LatoBold: require('../assets/fonts/Lato-Bold.ttf'),
 	LatoLight: require('../assets/fonts/Lato-Light.ttf'),
 	Heebo: require('../assets/fonts/Heebo-Bold.ttf')
 };
