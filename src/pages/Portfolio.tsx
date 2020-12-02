@@ -19,6 +19,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 				description: 'Loading',
 			},
 			projects: [],
+			loadMore: true,
 			page: 0
 		};
     }
@@ -35,11 +36,16 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 
 	async getProjectsInformations(page: number) {
 		const projects: ProjectsInformationProps[] = await ApiProject.getProject(page);
-		this.setState({projects: [...this.state.projects, ...projects], page: page});
+		this.setState({projects: [...this.state.projects, ...projects], page: page, loadMore: true});
 	}
 
 	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
-		return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 500)) {
+			this.setState({loadMore: false});
+			return true;
+		}
+
+		return false;
 	};
 
 
