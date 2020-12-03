@@ -8,12 +8,16 @@ export default class HeaderApp extends Component {
 		super(props);
 	}
 
+	backToHome() {
+		this.props.navigation.navigate('Home')
+	}
+
 	render = () => {
 	  return (
 		  <Header
-			  leftComponent={{ icon: 'menu', ...styles.button}}
+			  leftComponent={{ icon: 'menu', size: 40, ...styles.button}}
 			  centerComponent={{ ...{text: this.props.title}, ...{style: styles.title} }}
-			  rightComponent={{ icon: 'home', ...styles.button}}
+			  rightComponent={{ icon: 'home', size: 40, ...styles.button, onPress: () => { this.backToHome()}}}
 			  containerStyle={styles.header}
 		  />
 	  );

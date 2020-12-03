@@ -53,7 +53,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	render = () => {
 		return (
 			<View style={styleMain.pageContainer}>
-				<HeaderApp title={this.props.route.name} />
+				<HeaderApp navigation={this.props.navigation} title={this.props.route.name} />
 				<ScrollView onScroll={({ nativeEvent }) => {
 		            if (this.isGoingDown(nativeEvent)) {
 						const nextPage = this.state.page + 1;
