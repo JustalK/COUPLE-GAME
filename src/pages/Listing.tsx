@@ -5,13 +5,11 @@ import { styleText, styleMain } from '../styles/main'
 import { colors } from '../styles/colors'
 import Project from '../components/Project'
 import HeaderApp from '../components/HeaderApp'
-import Main from './Main'
 import ApiPage from '../services/ApiPage'
 import ApiProject from '../services/ApiProject'
 import {PagesInformationProps} from '../interfaces/Pages'
 import {ProjectsInformationProps} from '../interfaces/Projects'
 import {PortfolioProps, PortfolioStates} from '../interfaces/Portfolio'
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Portfolio extends Component<PortfolioProps, PortfolioStates> {
 	constructor(props: PortfolioProps) {
@@ -51,15 +49,21 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		return false;
 	};
 
-	onSwipeRight(gestureState) {
-		this.props.navigation.navigate("Home");
-	}
-
 	render = () => {
 		return (
 			<View style={styleMain.pageContainer}>
-				<HeaderApp navigation={this.props.navigation} title={this.props.route.name} />
-					<Main />
+					<ScrollView onScroll={({ nativeEvent }) => {
+			            if (this.isGoingDown(nativeEvent)) {
+							const nextPage = this.state.page + 1;
+							this.getProjectsInformations(nextPage);
+			            }
+					}} style={styleMain.pagePadding}>
+						<Text style={styles.title}>{this.state.informations.title}</Text>
+						<Text style={styles.description}>{this.state.informations.description}</Text>
+						{this.state.projects.map((project, index) => {
+							return <Project image={project.images[0].path} title={project.title} key={index}></Project>;
+						})}
+					</ScrollView>
 				<StatusBar style="auto" hidden />
 			</View>
 		)
