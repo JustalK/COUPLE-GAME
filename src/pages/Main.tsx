@@ -6,6 +6,7 @@ import { styleText, styleMain } from '../styles/main'
 import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
 import Listing from './Listing'
+import Menu from './Menu'
 import profileImg from '../../assets/me.jpeg'
 import {HomeProps, HomeStates} from '../interfaces/Home'
 import { TabView, SceneMap } from 'react-native-tab-view';
@@ -23,6 +24,12 @@ export default class Main extends Component {
 		}
 	}
 
+	updateIndex(index) {
+		// There is a bug inside react native tab view
+		//
+		this.states.index = index;
+	}
+
 	render = () => {
 		const initialLayout = { width: Dimensions.get('window').width };
 
@@ -31,14 +38,16 @@ export default class Main extends Component {
 		);
 
 		const renderScene = SceneMap({
-			first: Listing,
-			second: SecondRoute,
+			first: Menu,
+			second: Listing
 		});
 
 		return (
 			<TabView
-		      navigationState={{index: this.states.index, routes: this.states.routes }}
+		      navigationState={this.states}
 		      renderScene={renderScene}
+			  renderTabBar={() => null}
+			  onIndexChange={(index) => this.updateIndex(index)}
 		      initialLayout={initialLayout}
 		    />
 		);

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { StyleSheet, Text, Image, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, Image, View, TouchableWithoutFeedback } from "react-native";
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import BlinkingEffect from '../components/BlinkingEffect'
@@ -16,8 +16,8 @@ export default class Home extends Component<HomeProps, HomeStates> {
 
 	render = () => {
 		return (
-			<TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} style={styleMain.homeContainer}>
-				<View>
+			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Portfolio')}>
+				<View style={styleMain.homeContainer}>
 					<Image
 						style={styles.portrait}
 						source={profileImg}
@@ -30,7 +30,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 					</BlinkingEffect>
 					<StatusBar style="auto" hidden />
 				</View>
-			</TouchableHighlight>
+			</TouchableWithoutFeedback>
 		);
 	}
 }
