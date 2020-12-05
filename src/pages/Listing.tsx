@@ -49,7 +49,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	}
 
 	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
-		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 500)) {
+		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000)) {
 			this.setState({loadMore: false});
 			return true;
 		}
@@ -70,7 +70,6 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 			<View style={styleMain.pageContainer}>
 					<ScrollView onScroll={({nativeEvent}) => {
 			            if (this.isGoingDown(nativeEvent) && !this.endOfPage()) {
-							console.log(this.state.page);
 							const nextPage = this.state.page + 1;
 							this.getProjectsInformations(nextPage);
 			            }

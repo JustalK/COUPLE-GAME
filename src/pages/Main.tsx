@@ -17,7 +17,7 @@ export default class Main extends Component {
 		super(props);
 		this.state = {
 			index: 1,
-			idProject: 0,
+			idProject: "5fcb294909c6720bc207e5a1",
 			routes: [
 				{ key: 'menu', title: 'Menu' },
 				{ key: 'listing', title: 'Listing' },
@@ -37,7 +37,7 @@ export default class Main extends Component {
 	renderScene({ route, jumpTo }) {
 		switch (route.key) {
 			case 'menu':
-				return <Menu jumpTo={jumpTo} />;
+				return <Menu updateIdProject={(id) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'listing':
 				return <Listing updateIdProject={(id) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'project':

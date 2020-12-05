@@ -39,7 +39,7 @@ export default class Menu extends Component {
 				<View style={styles.section}>
 					<Text style={styles.title}>Projects</Text>
 					{this.state.projects.map((project, index) => {
-						return <Button key={index} index={index} slug={project.slug} buttonTitle={project.title} />
+						return <Button key={index} updateIdProject={this.props.updateIdProject} jumpTo={this.props.jumpTo} idProject={project.id} index={index} slug={project.slug} buttonTitle={project.title} />
 					})}
 				</View>
 			</ScrollView>
