@@ -16,8 +16,16 @@ export default class ProjectZoom extends Component {
 	}
 
 	async componentDidMount() {
-		const project = await ApiProject.getOneProject("5fcb294909c6720bc207e5a1");
+		await this.loadProject("5fcb294909c6720bc207e5a1");
+	}
+
+	async loadProject(idProject) {
+		const project = await ApiProject.getOneProject(idProject);
 		this.setState({title: project.title, description: project.long_description})
+	}
+
+	async componentDidUpdate() {
+		await this.loadProject(this.props.idProject);
 	}
 
 	render = () => {

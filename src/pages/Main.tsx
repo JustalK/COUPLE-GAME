@@ -17,10 +17,11 @@ export default class Main extends Component {
 		super(props);
 		this.state = {
 			index: 1,
+			idProject: 0,
 			routes: [
-				{ key: 'first', title: 'Menu' },
-				{ key: 'second', title: 'Listing' },
-				{ key: 'third', title: 'Zoom' }
+				{ key: 'menu', title: 'Menu' },
+				{ key: 'listing', title: 'Listing' },
+				{ key: 'project', title: 'Zoom' }
 			]
 		}
 	}
@@ -29,27 +30,33 @@ export default class Main extends Component {
 		this.setState({index});
 	}
 
+	updateIdProject(index) {
+		this.setState({idProject: index});
+	}
+
 	renderScene({ route, jumpTo }) {
 		switch (route.key) {
-			case 'first':
+			case 'menu':
 				return <Menu jumpTo={jumpTo} />;
-			case 'second':
-				return <Listing jumpTo={jumpTo} />;
-			case 'third':
-				return <ProjectZoom jumpTo={jumpTo} />;
+			case 'listing':
+				return <Listing updateIdProject={(id) => this.updateIdProject(id)} jumpTo={jumpTo} />;
+			case 'project':
+				return <ProjectZoom idProject={this.state.idProject} jumpTo={jumpTo} />;
 		}
 	}
 
-	render = () => {
-		const initialLayout = { width: Dimensions.get('window').width };
+	initialLayout() {
+		return { width: Dimensions.get('window').width };
+	}
 
+	render = () => {
 		return (
 			<TabView
 		      navigationState={this.state}
-		      renderScene={this.renderScene}
+		      renderScene={(rs) => this.renderScene(rs)}
 			  renderTabBar={() => null}
 			  onIndexChange={(index) => this.updateIndex(index)}
-		      initialLayout={initialLayout}
+		      initialLayout={this.initialLayout()}
 		    />
 		);
 	}

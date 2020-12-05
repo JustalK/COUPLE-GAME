@@ -78,7 +78,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 						<Text style={styles.title}>{this.state.informations.title}</Text>
 						<Text style={styles.description}>{this.state.informations.description}</Text>
 						{this.state.projects.map((project, index) => {
-							return <Project image={project.images[0].path} jumpTo={this.props.jumpTo} id={project._id} title={project.title} key={index}></Project>;
+							return <Project image={project.images[0].path} updateIdProject={this.props.updateIdProject} jumpTo={this.props.jumpTo} id={project._id} title={project.title} key={index}></Project>;
 						})}
 						{this.endOfPage() && this.renderEndOfPage()}
 					</ScrollView>

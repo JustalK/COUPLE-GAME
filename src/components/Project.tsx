@@ -8,14 +8,14 @@ export default class Project extends Component<ProjectsProps, ProjectsStates> {
 		super(props);
 	}
 
-	zoomProject() {
-		console.log('hey');
-		this.props.jumpTo('third');
+	zoomProject(id) {
+		this.props.updateIdProject(id);
+		this.props.jumpTo('project');
 	}
 
 	render = () => {
 	  return (
-	    <TouchableHighlight onPress={() => this.zoomProject()}>
+	    <TouchableHighlight onPress={() => this.zoomProject(this.props.id)}>
 			<View style={styles.project}>
 				<Text style={styles.title}>{this.props.title}</Text>
 				<Image source={{uri: "http://justalk.online" + this.props.image}} style={{height: 200}} />
