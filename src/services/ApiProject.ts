@@ -8,6 +8,11 @@ export default class ApiProject extends Component {
 		return Api.success(response);
 	}
 
+	static getOneProject = async (id: string): Promise<ProjectsInformationProps[]> => {
+		const response = await Api.get("/articles/one?id=" + id + "&populate=true");
+		return Api.success(response);
+	}
+
 	static countProject = async (page: number): Promise<ProjectsInformationProps[]> => {
 		const response = await Api.get("/articles/count?tags=5f95461688489acdd8ee5871");
 		return Api.success(response);

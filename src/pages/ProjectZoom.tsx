@@ -9,13 +9,23 @@ import ApiProject from '../services/ApiProject'
 export default class ProjectZoom extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			title: "",
+			description: ""
+		}
+	}
+
+	async componentDidMount() {
+		const project = await ApiProject.getOneProject("5fcb294909c6720bc207e5a1");
+		this.setState({title: project.title, description: project.long_description})
 	}
 
 	render = () => {
 		return (
 			<ScrollView>
-				<View style={styles.section}>
-					<Text>Test</Text>
+				<View>
+					<Text style={styles.title}>{this.state.title}</Text>
+					<Text style={styles.description}>{this.state.description}</Text>
 				</View>
 			</ScrollView>
 		);
@@ -23,31 +33,22 @@ export default class ProjectZoom extends Component {
 }
 
 const styles = StyleSheet.create({
-	section: {
-		marginBottom: 50
-	},
 	title: {
-		fontSize: 18,
-		lineHeight: 40,
-		fontFamily: "LatoBold",
-		textAlign: "left",
-		margin: 20,
-		color: colors.cyan,
-		textTransform: "uppercase"
-	},
-	button: {
-		borderRadius: 0,
-		backgroundColor: colors.cyan,
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		padding: 20
-	},
-	buttonText: {
-		fontSize: 18,
-		fontFamily: "LatoBold",
-		textTransform: "capitalize",
+		marginTop: 40,
+		fontSize: 50,
+		fontWeight: "bold",
+		fontFamily: "LatoLight",
+		textAlign: "center",
 		color: colors.white,
-		lineHeight: 40
+		textTransform: "uppercase",
+		marginBottom: 40
+	},
+	description: {
+		fontSize: 20,
+		fontFamily: "LatoLight",
+		textAlign: "center",
+		color: colors.cyan,
+		alignSelf: 'flex-start',
+		marginBottom: 50
 	}
 });
