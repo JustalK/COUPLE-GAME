@@ -11,7 +11,6 @@ import profileImg from '../../assets/me.jpeg'
 import {HomeProps, HomeStates} from '../interfaces/Home'
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
 export default class Main extends Component {
 	constructor(props) {
 		super(props);
@@ -25,8 +24,6 @@ export default class Main extends Component {
 	}
 
 	updateIndex(index) {
-		// There is a bug inside react native tab view
-		//
 		this.states.index = index;
 	}
 

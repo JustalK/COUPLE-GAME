@@ -7,11 +7,21 @@ import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
 import profileImg from '../../assets/me.jpeg'
 import {HomeProps, HomeStates} from '../interfaces/Home'
+import ApiContact from '../services/ApiContact'
 
 const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
 export default class Home extends Component<HomeProps, HomeStates> {
 	constructor(props: HomeProps) {
 		super(props);
+		this.state = {
+			fullname: ""
+		}
+	}
+
+	async componentDidMount() {
+		const identity = await ApiContact.getMyContact();
+		console.log(identity);
+		this.setState({fullname: identity.fullname})
 	}
 
 	render = () => {
@@ -22,7 +32,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 						style={styles.portrait}
 						source={profileImg}
 					/>
-					<Text style={styles.textStyle}>Hello World, Im Justal Kevin</Text>
+					<Text style={styles.textStyle}>Hello World, Im {this.state.fullname}</Text>
 					<WritingEffect style={styles.textStyle as {}} predata="Im a" data={jobs}></WritingEffect>
 					<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
 					<BlinkingEffect>
