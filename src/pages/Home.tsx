@@ -8,20 +8,24 @@ import WritingEffect from '../components/WritingEffect'
 import profileImg from '../../assets/me.jpeg'
 import {HomeProps, HomeStates} from '../interfaces/Home'
 import ApiContact from '../services/ApiContact'
+import ApiJob from '../services/ApiJob'
 
 const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
 export default class Home extends Component<HomeProps, HomeStates> {
 	constructor(props: HomeProps) {
 		super(props);
 		this.state = {
-			fullname: ""
+			fullname: "",
+			email: "",
+			jobs: [""]
 		}
 	}
 
 	async componentDidMount() {
 		const identity = await ApiContact.getMyContact();
-		console.log(identity);
-		this.setState({fullname: identity.fullname})
+		const jobs = await ApiJob.getJobs();
+		const jobs_title = jobs.map(job => job.title);
+		this.setState({fullname: identity.fullname, email: identity.email, jobs: jobs_title});
 	}
 
 	render = () => {
@@ -33,8 +37,8 @@ export default class Home extends Component<HomeProps, HomeStates> {
 						source={profileImg}
 					/>
 					<Text style={styles.textStyle}>Hello World, Im {this.state.fullname}</Text>
-					<WritingEffect style={styles.textStyle as {}} predata="Im a" data={jobs}></WritingEffect>
-					<Text style={styles.textStyle}>If any questions, contact me at justal.kevin@gmail.com</Text>
+					<WritingEffect style={styles.textStyle as {}} predata="Im a" data={this.state.jobs}></WritingEffect>
+					<Text style={styles.textStyle}>If any questions, contact me at {this.state.email}</Text>
 					<BlinkingEffect>
 						<Text style={styles.intructions}>Press the screen</Text>
 					</BlinkingEffect>
