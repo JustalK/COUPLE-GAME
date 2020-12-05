@@ -57,11 +57,20 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		return false;
 	};
 
+	endOfPage(): boolean {
+		return this.state.page + 1 > this.state.pageLimit;
+	}
+
+	renderEndOfPage() {
+		return (<Text style={styles.end}>You have reached the bottom of the page</Text>);
+	}
+
 	render = () => {
 		return (
 			<View style={styleMain.pageContainer}>
 					<ScrollView onScroll={({nativeEvent}) => {
-			            if (this.isGoingDown(nativeEvent) && this.state.page + 1 < this.state.pageLimit) {
+			            if (this.isGoingDown(nativeEvent) && !this.endOfPage()) {
+							console.log(this.state.page);
 							const nextPage = this.state.page + 1;
 							this.getProjectsInformations(nextPage);
 			            }
@@ -71,6 +80,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 						{this.state.projects.map((project, index) => {
 							return <Project image={project.images[0].path} title={project.title} key={index}></Project>;
 						})}
+						{this.endOfPage() && this.renderEndOfPage()}
 					</ScrollView>
 				<StatusBar style="auto" hidden />
 			</View>
@@ -96,5 +106,14 @@ const styles = StyleSheet.create({
 		color: colors.cyan,
 		alignSelf: 'flex-start',
 		marginBottom: 50
+	},
+	end: {
+		fontSize: 20,
+		fontFamily: "LatoLight",
+		textAlign: "center",
+		color: colors.cyan,
+		alignSelf: 'center',
+		marginTop: 50,
+		marginBottom: 100
 	},
 });

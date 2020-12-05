@@ -59,7 +59,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		return (
 			<View style={styleMain.pageContainer}>
 				<HeaderApp navigation={this.props.navigation} title={this.props.route.name} />
-					<Main />
+				<Main />
 				<StatusBar style="auto" hidden />
 			</View>
 		)

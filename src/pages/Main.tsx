@@ -7,6 +7,7 @@ import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
 import Listing from './Listing'
 import Menu from './Menu'
+import ProjectZoom from './ProjectZoom'
 import profileImg from '../../assets/me.jpeg'
 import {HomeProps, HomeStates} from '../interfaces/Home'
 import { TabView, SceneMap } from 'react-native-tab-view';
@@ -17,8 +18,9 @@ export default class Main extends Component {
 		this.states = {
 			index: 1,
 			routes: [
-				{ key: 'first', title: 'First' },
-				{ key: 'second', title: 'Second' }
+				{ key: 'first', title: 'Menu' },
+				{ key: 'second', title: 'Listing' },
+				{ key: 'third', title: 'Zoom' }
 			]
 		}
 	}
@@ -30,13 +32,10 @@ export default class Main extends Component {
 	render = () => {
 		const initialLayout = { width: Dimensions.get('window').width };
 
-		const SecondRoute = () => (
-		  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-		);
-
 		const renderScene = SceneMap({
 			first: Menu,
-			second: Listing
+			second: Listing,
+			third: ProjectZoom
 		});
 
 		return (
