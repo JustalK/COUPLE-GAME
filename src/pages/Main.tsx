@@ -15,7 +15,7 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 export default class Main extends Component {
 	constructor(props) {
 		super(props);
-		this.states = {
+		this.state = {
 			index: 1,
 			routes: [
 				{ key: 'first', title: 'Menu' },
@@ -26,22 +26,27 @@ export default class Main extends Component {
 	}
 
 	updateIndex(index) {
-		this.states.index = index;
+		this.setState({index});
+	}
+
+	renderScene({ route, jumpTo }) {
+		switch (route.key) {
+			case 'first':
+				return <Menu jumpTo={jumpTo} />;
+			case 'second':
+				return <Listing jumpTo={jumpTo} />;
+			case 'third':
+				return <ProjectZoom jumpTo={jumpTo} />;
+		}
 	}
 
 	render = () => {
 		const initialLayout = { width: Dimensions.get('window').width };
 
-		const renderScene = SceneMap({
-			first: Menu,
-			second: Listing,
-			third: ProjectZoom
-		});
-
 		return (
 			<TabView
-		      navigationState={this.states}
-		      renderScene={renderScene}
+		      navigationState={this.state}
+		      renderScene={this.renderScene}
 			  renderTabBar={() => null}
 			  onIndexChange={(index) => this.updateIndex(index)}
 		      initialLayout={initialLayout}
