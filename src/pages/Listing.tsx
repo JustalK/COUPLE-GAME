@@ -16,11 +16,12 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		super(props);
 		this.state = {
 			informations: {
-				title: 'Loading',
-				description: 'Loading',
+				title: "",
+				description: "",
 			},
 			projects: [],
 			loadMore: true,
+			pageLimit: 0,
 			page: 0
 		};
     }
@@ -28,11 +29,18 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	async componentDidMount() {
 		await this.getPageInformations();
 		await this.getProjectsInformations(0);
+		await this.getPageLimit();
 	}
 
 	async getPageInformations() {
 		const infos: PagesInformationProps[] = await ApiPage.getPortfolioInformation();
 		this.setState({informations: infos[0]})
+	}
+
+	async getPageLimit() {
+		const total: number = await ApiProject.countProject();
+		const pageMax: number = total.total / 4;
+		this.setState({pageLimit: pageMax});
 	}
 
 	async getProjectsInformations(page: number) {
@@ -52,8 +60,8 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	render = () => {
 		return (
 			<View style={styleMain.pageContainer}>
-					<ScrollView onScroll={({ nativeEvent }) => {
-			            if (this.isGoingDown(nativeEvent)) {
+					<ScrollView onScroll={({nativeEvent}) => {
+			            if (this.isGoingDown(nativeEvent) && this.state.page + 1 < this.state.pageLimit) {
 							const nextPage = this.state.page + 1;
 							this.getProjectsInformations(nextPage);
 			            }

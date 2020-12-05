@@ -15,7 +15,7 @@ export default class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.states = {
-			index: 0,
+			index: 1,
 			routes: [
 				{ key: 'first', title: 'First' },
 				{ key: 'second', title: 'Second' }
