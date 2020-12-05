@@ -4,7 +4,7 @@ import {PagesInformationProps} from '../interfaces/Pages'
 
 export default class ApiPage extends Component {
 	static getPortfolioInformation = async (): Promise<PagesInformationProps[]> => {
-		const response = await Api.get("http://justalk.online/api/pages?name=portfolio");
+		const response = await Api.get("/pages?name=portfolio");
 		return Api.success(response);
 	}
 }

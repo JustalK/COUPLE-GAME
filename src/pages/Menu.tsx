@@ -4,10 +4,23 @@ import { Icon } from 'react-native-elements'
 import Button from '../components/Button'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
+import ApiProject from '../services/ApiProject'
 
 export default class Menu extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			projects: []
+		}
+	}
+
+	async componentDidMount() {
+		await this.getMenuInformations();
+	}
+
+	async getMenuInformations() {
+		const infos: PagesInformationProps[] = await ApiProject.getMenu();
+		this.setState({projects: infos})
 	}
 
 	render = () => {
@@ -15,17 +28,6 @@ export default class Menu extends Component {
 			buttonTitle: "Button 1"
 		}]
 
-		const projects = [{
-			buttonTitle: "Button 1"
-		},{
-			buttonTitle: "Button 2"
-		},{
-			buttonTitle: "Button 3"
-		},{
-			buttonTitle: "Button 4"
-		},{
-			buttonTitle: "Button 5"
-		}]
 		return (
 			<ScrollView>
 				<View style={styles.section}>
@@ -36,8 +38,8 @@ export default class Menu extends Component {
 				</View>
 				<View style={styles.section}>
 					<Text style={styles.title}>Projects</Text>
-					{projects.map((button, index) => {
-						return <Button key={index} index={index} buttonTitle={button.buttonTitle} />
+					{this.state.projects.map((project, index) => {
+						return <Button key={index} index={index} slug={project.slug} buttonTitle={project.title} />
 					})}
 				</View>
 			</ScrollView>
