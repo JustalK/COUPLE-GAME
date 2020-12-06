@@ -15,6 +15,7 @@ export default class ProjectZoom extends Component {
 		this.state = {
 			title: "",
 			description: "",
+			loadMore: true,
 			slidesId: [],
 			slides: []
 		}
@@ -31,12 +32,17 @@ export default class ProjectZoom extends Component {
 			slides = [await this.loadSlide(project.slides[0])];
 		}
 
-		this.setState({title: project.title, description: project.long_description, slidesId: project.slides, slides: slides})
+		this.setState({title: project.title, description: project.long_description, slidesId: project.slides, slides: slides, loadMore: true})
 		this.props.projectLoaded();
 	}
 
 	async loadSlide(idSlide) {
 		return ApiSlide.getOneSlide(idSlide);
+	}
+
+	async nextSlide(idSlide) {
+		const slides = await ApiSlide.getOneSlide(idSlide);
+		this.setState({slides: [...this.state.slides, slides], loadMore: true});
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -45,13 +51,26 @@ export default class ProjectZoom extends Component {
 		}
 	}
 
+	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
+		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000)) {
+			this.setState({loadMore: false});
+			return true;
+		}
+
+		return false;
+	};
+
+	lastSlide(): boolean {
+		return this.state.slides.length === this.state.slidesId.length;
+	}
+
 	renderProject() {
 		return (
 			<View>
 				<Text style={styles.title}>{this.state.title}</Text>
 				<Text style={styles.description}>{this.state.description}</Text>
 				{this.state.slides.map((slide, index) => {
-					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} image={slide.image.path} />;
+					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} title={slide.image.name} image={slide.image.path} />;
 				})}
 			</View>
 		)
@@ -63,7 +82,12 @@ export default class ProjectZoom extends Component {
 
 	render = () => {
 		return (
-			<ScrollView style={styleMain.pagePadding}>
+			<ScrollView onScroll={({nativeEvent}) => {
+				if (this.isGoingDown(nativeEvent) && !this.lastSlide()) {
+					const nextSlide = this.state.slides.length;
+					this.nextSlide(this.state.slidesId[nextSlide]);
+				}
+			}} style={styleMain.pagePadding}>
 				<View>
 					{this.props.loadingProject && this.renderLoading()}
 					{!this.props.loadingProject && this.renderProject()}
