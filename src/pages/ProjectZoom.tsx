@@ -3,16 +3,20 @@ import { StyleSheet, Text, Image, View, ScrollView, TouchableWithoutFeedback } f
 import { Icon } from 'react-native-elements'
 import Button from '../components/Button'
 import Loading from '../components/Loading'
+import Slide from '../components/Slide'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import ApiProject from '../services/ApiProject'
+import ApiSlide from '../services/ApiSlide'
 
 export default class ProjectZoom extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			title: "",
-			description: ""
+			description: "",
+			slidesId: [],
+			slides: []
 		}
 	}
 
@@ -22,13 +26,22 @@ export default class ProjectZoom extends Component {
 
 	async loadProject(idProject) {
 		const project = await ApiProject.getOneProject(idProject);
-		this.setState({title: project.title, description: project.long_description})
+		let slides = [];
+		if(project.slides !== null && project.slides.length > 0) {
+			slides = [await this.loadSlide(project.slides[0])];
+		}
+
+		this.setState({title: project.title, description: project.long_description, slidesId: project.slides, slides: slides})
 		this.props.projectLoaded();
+	}
+
+	async loadSlide(idSlide) {
+		return ApiSlide.getOneSlide(idSlide);
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.idProject !== prevProps.idProject) {
-			await this.loadProject(this.props.idProject);
+			await this.loadProject(this.props.idProject, 0);
 		}
 	}
 
@@ -37,6 +50,9 @@ export default class ProjectZoom extends Component {
 			<View>
 				<Text style={styles.title}>{this.state.title}</Text>
 				<Text style={styles.description}>{this.state.description}</Text>
+				{this.state.slides.map((slide, index) => {
+					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} image={slide.image.path} />;
+				})}
 			</View>
 		)
 	}
@@ -47,7 +63,7 @@ export default class ProjectZoom extends Component {
 
 	render = () => {
 		return (
-			<ScrollView>
+			<ScrollView style={styleMain.pagePadding}>
 				<View>
 					{this.props.loadingProject && this.renderLoading()}
 					{!this.props.loadingProject && this.renderProject()}
