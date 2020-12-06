@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, Image, View, ScrollView, TouchableWithoutFeedback } from "react-native";
 import { Icon } from 'react-native-elements'
 import Button from '../components/Button'
+import Loading from '../components/Loading'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import ApiProject from '../services/ApiProject'
@@ -22,18 +23,34 @@ export default class ProjectZoom extends Component {
 	async loadProject(idProject) {
 		const project = await ApiProject.getOneProject(idProject);
 		this.setState({title: project.title, description: project.long_description})
+		this.props.projectLoaded();
 	}
 
-	async componentDidUpdate() {
-		await this.loadProject(this.props.idProject);
+	async componentDidUpdate(prevProps) {
+		if (this.props.idProject !== prevProps.idProject) {
+			await this.loadProject(this.props.idProject);
+		}
+	}
+
+	renderProject() {
+		return (
+			<View>
+				<Text style={styles.title}>{this.state.title}</Text>
+				<Text style={styles.description}>{this.state.description}</Text>
+			</View>
+		)
+	}
+
+	renderLoading() {
+		return (<Loading />);
 	}
 
 	render = () => {
 		return (
 			<ScrollView>
 				<View>
-					<Text style={styles.title}>{this.state.title}</Text>
-					<Text style={styles.description}>{this.state.description}</Text>
+					{this.props.loadingProject && this.renderLoading()}
+					{!this.props.loadingProject && this.renderProject()}
 				</View>
 			</ScrollView>
 		);

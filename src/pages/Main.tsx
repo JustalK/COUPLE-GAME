@@ -5,6 +5,7 @@ import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import BlinkingEffect from '../components/BlinkingEffect'
 import WritingEffect from '../components/WritingEffect'
+import Loading from '../components/Loading'
 import Listing from './Listing'
 import Menu from './Menu'
 import ProjectZoom from './ProjectZoom'
@@ -22,7 +23,8 @@ export default class Main extends Component {
 				{ key: 'menu', title: 'Menu' },
 				{ key: 'listing', title: 'Listing' },
 				{ key: 'project', title: 'Zoom' }
-			]
+			],
+			loadingProject: true
 		}
 	}
 
@@ -31,7 +33,11 @@ export default class Main extends Component {
 	}
 
 	updateIdProject(index) {
-		this.setState({idProject: index});
+		this.setState({idProject: index, loadingProject: true});
+	}
+
+	projectLoaded() {
+		this.setState({loadingProject: false});
 	}
 
 	renderScene({ route, jumpTo }) {
@@ -41,7 +47,7 @@ export default class Main extends Component {
 			case 'listing':
 				return <Listing updateIdProject={(id) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'project':
-				return <ProjectZoom idProject={this.state.idProject} jumpTo={jumpTo} />;
+				return <ProjectZoom loadingProject={this.state.loadingProject} projectLoaded={() => this.projectLoaded()} idProject={this.state.idProject} jumpTo={jumpTo} />;
 		}
 	}
 
