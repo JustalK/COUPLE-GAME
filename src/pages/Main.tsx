@@ -10,11 +10,11 @@ import Listing from './Listing'
 import Menu from './Menu'
 import ProjectZoom from './ProjectZoom'
 import profileImg from '../../assets/me.jpeg'
-import {HomeProps, HomeStates} from '../interfaces/Home'
+import {MainProps, MainStates, RouteProps} from '../interfaces/Main'
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-export default class Main extends Component {
-	constructor(props) {
+export default class Main extends Component<MainProps, MainStates> {
+	constructor(props: MainProps) {
 		super(props);
 		this.state = {
 			index: 1,
@@ -28,11 +28,11 @@ export default class Main extends Component {
 		}
 	}
 
-	updateIndex(index) {
+	updateIndex(index: number) {
 		this.setState({index});
 	}
 
-	updateIdProject(index) {
+	updateIdProject(index: string) {
 		this.setState({idProject: index, loadingProject: true});
 	}
 
@@ -40,12 +40,12 @@ export default class Main extends Component {
 		this.setState({loadingProject: false});
 	}
 
-	renderScene({ route, jumpTo }) {
+	renderScene(route: RouteProps, jumpTo: (key: string) => void) {
 		switch (route.key) {
 			case 'menu':
-				return <Menu updateIdProject={(id) => this.updateIdProject(id)} jumpTo={jumpTo} />;
+				return <Menu updateIdProject={(id: string) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'listing':
-				return <Listing updateIdProject={(id) => this.updateIdProject(id)} jumpTo={jumpTo} />;
+				return <Listing updateIdProject={(id: string) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'project':
 				return <ProjectZoom loadingProject={this.state.loadingProject} projectLoaded={() => this.projectLoaded()} idProject={this.state.idProject} jumpTo={jumpTo} />;
 		}
@@ -59,7 +59,7 @@ export default class Main extends Component {
 		return (
 			<TabView
 		      navigationState={this.state}
-		      renderScene={(rs) => this.renderScene(rs)}
+		      renderScene={(rs) => this.renderScene(rs.route, rs.jumpTo)}
 			  renderTabBar={() => null}
 			  onIndexChange={(index) => this.updateIndex(index)}
 		      initialLayout={this.initialLayout()}

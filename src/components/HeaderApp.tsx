@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, TouchableHighlight, Text, Image, View } from 'react-native';
+import {HeaderAppProps, HeaderAppStates} from '../interfaces/HeaderApp'
 import { colors } from '../styles/colors'
 import { Header } from 'react-native-elements';
 
-export default class HeaderApp extends Component {
-	constructor(props) {
+export default class HeaderApp extends Component<HeaderAppProps, HeaderAppStates> {
+	constructor(props: HeaderAppProps) {
 		super(props);
 	}
 

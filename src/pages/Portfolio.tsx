@@ -11,7 +11,6 @@ import ApiProject from '../services/ApiProject'
 import {PagesInformationProps} from '../interfaces/Pages'
 import {ProjectsInformationProps} from '../interfaces/Projects'
 import {PortfolioProps, PortfolioStates} from '../interfaces/Portfolio'
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Portfolio extends Component<PortfolioProps, PortfolioStates> {
 	constructor(props: PortfolioProps) {
@@ -40,19 +39,6 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	async getProjectsInformations(page: number) {
 		const projects: ProjectsInformationProps[] = await ApiProject.getProject(page);
 		this.setState({projects: [...this.state.projects, ...projects], page: page, loadMore: true});
-	}
-
-	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
-		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 500)) {
-			this.setState({loadMore: false});
-			return true;
-		}
-
-		return false;
-	};
-
-	onSwipeRight(gestureState) {
-		this.props.navigation.navigate("Home");
 	}
 
 	render = () => {

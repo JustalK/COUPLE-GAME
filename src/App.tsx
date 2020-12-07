@@ -9,7 +9,6 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Animated, Button } from "react-native";
 import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
-import HeaderTitle from './components/HeaderTitle'
 import * as Font from 'expo-font';
 import {AppProps, AppStates} from './interfaces/App'
 import { colors } from './styles/colors'

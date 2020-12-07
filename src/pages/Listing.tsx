@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from 'react';
-import { ActivityIndicator, Text, View, ScrollView, StyleSheet, ViewStyle } from "react-native";
+import { ActivityIndicator, Text, View, ScrollView, StyleSheet, ViewStyle, NativeScrollSize, NativeScrollPoint } from "react-native";
 import { styleText, styleMain } from '../styles/main'
 import { colors } from '../styles/colors'
 import Project from '../components/Project'
@@ -12,10 +12,10 @@ import ApiPage from '../services/ApiPage'
 import ApiProject from '../services/ApiProject'
 import {PagesInformationProps} from '../interfaces/Pages'
 import {ProjectsInformationProps} from '../interfaces/Projects'
-import {PortfolioProps, PortfolioStates} from '../interfaces/Portfolio'
+import {ListingProps, ListingStates} from '../interfaces/Listing'
 
-export default class Portfolio extends Component<PortfolioProps, PortfolioStates> {
-	constructor(props: PortfolioProps) {
+export default class Portfolio extends Component<ListingProps, ListingStates> {
+	constructor(props: ListingProps) {
 		super(props);
 		this.state = {
 			informations: {
@@ -42,7 +42,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	}
 
 	async getPageLimit() {
-		const total: number = await ApiProject.countProject();
+		const total = await ApiProject.countProject();
 		const pageMax: number = total.total / 4;
 		this.setState({pageLimit: pageMax});
 	}
@@ -52,7 +52,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		this.setState({projects: [...this.state.projects, ...projects], page: page, loadMore: true, loading: false});
 	}
 
-	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
+	isGoingDown(layoutMeasurement: NativeScrollSize, contentOffset: NativeScrollPoint, contentSize: NativeScrollSize) {
 		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000)) {
 			this.setState({loadMore: false});
 			return true;
@@ -83,7 +83,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	renderListing() {
 		return (
 			<ScrollView onScroll={({nativeEvent}) => {
-				if (this.isGoingDown(nativeEvent) && !this.endOfPage()) {
+				if (this.isGoingDown(nativeEvent.layoutMeasurement, nativeEvent.contentOffset, nativeEvent.contentSize) && !this.endOfPage()) {
 					const nextPage = this.state.page + 1;
 					this.getProjectsInformations(nextPage);
 				}

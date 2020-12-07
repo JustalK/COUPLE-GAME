@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {StyleSheet, TouchableHighlight, Text, Image, View } from 'react-native';
+import {TitleProps, TitleStates} from '../interfaces/Title'
 import { colors } from '../styles/colors'
 
-export default class Title extends Component {
-	constructor(props) {
+export default class Title extends Component<TitleProps, TitleStates> {
+	constructor(props: TitleProps) {
 		super(props);
 	}
 

@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback } from "react-native";
+import {ButtonProps, ButtonStates} from '../interfaces/Button'
 import { Icon } from 'react-native-elements'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 
-export default class Button extends Component {
-	constructor(props) {
+export default class Button extends Component<ButtonProps, ButtonStates> {
+	constructor(props: ButtonProps) {
 		super(props);
 	}
 
-	checkIndexIsEven (n) {
+	checkIndexIsEven (n: number) {
 		return n % 2 == 0;
 	}
 
-	zoomProject(id) {
+	zoomProject(id: string) {
 		this.props.updateIdProject(id);
 		this.props.jumpTo('project');
 	}

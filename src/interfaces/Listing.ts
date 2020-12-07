@@ -5,16 +5,18 @@ export interface RouteNavProps {
 	name: string
 }
 
-export interface PortfolioProps {
+export interface ListingProps {
 	updateIdProject(id: string): void
 	jumpTo(route: string): void
 	route: RouteNavProps
 	navigation: any
 }
 
-export interface PortfolioStates {
+export interface ListingStates {
 	informations: PagesInformationProps
 	projects: ProjectsInformationProps[]
 	loadMore: boolean
+	loading: boolean
+	pageLimit: number
 	page: number
 }

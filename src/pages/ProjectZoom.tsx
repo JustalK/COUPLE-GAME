@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, Image, View, ScrollView, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, Text, Image, View, ScrollView, TouchableWithoutFeedback, NativeScrollSize, NativeScrollPoint } from "react-native";
 import { Icon } from 'react-native-elements'
 import Button from '../components/Button'
 import Loading from '../components/Loading'
@@ -10,9 +10,11 @@ import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import ApiProject from '../services/ApiProject'
 import ApiSlide from '../services/ApiSlide'
+import {ProjectZoomProps, ProjectZoomStates} from '../interfaces/ProjectZoom'
+import {SlideApiProps} from '../interfaces/Slide'
 
-export default class ProjectZoom extends Component {
-	constructor(props) {
+export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoomStates> {
+	constructor(props: ProjectZoomProps) {
 		super(props);
 		this.state = {
 			title: "",
@@ -27,9 +29,9 @@ export default class ProjectZoom extends Component {
 		await this.loadProject("5fcb294909c6720bc207e5a1");
 	}
 
-	async loadProject(idProject) {
+	async loadProject(idProject: string) {
 		const project = await ApiProject.getOneProject(idProject);
-		let slides = [];
+		let slides: SlideApiProps[] = [];
 		if(project.slides !== null && project.slides.length > 0) {
 			slides = [await this.loadSlide(project.slides[0])];
 		}
@@ -38,22 +40,22 @@ export default class ProjectZoom extends Component {
 		this.props.projectLoaded();
 	}
 
-	async loadSlide(idSlide) {
+	async loadSlide(idSlide: string) {
 		return ApiSlide.getOneSlide(idSlide);
 	}
 
-	async nextSlide(idSlide) {
+	async nextSlide(idSlide: string) {
 		const slides = await ApiSlide.getOneSlide(idSlide);
 		this.setState({slides: [...this.state.slides, slides], loadMore: true});
 	}
 
-	async componentDidUpdate(prevProps) {
+	async componentDidUpdate(prevProps: ProjectZoomProps) {
 		if (this.props.idProject !== prevProps.idProject) {
-			await this.loadProject(this.props.idProject, 0);
+			await this.loadProject(this.props.idProject);
 		}
 	}
 
-	isGoingDown({ layoutMeasurement, contentOffset, contentSize }) {
+	isGoingDown(layoutMeasurement: NativeScrollSize, contentOffset: NativeScrollPoint, contentSize: NativeScrollSize) {
 		if (this.state.loadMore && (layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000)) {
 			this.setState({loadMore: false});
 			return true;
@@ -68,13 +70,18 @@ export default class ProjectZoom extends Component {
 
 	renderProject() {
 		return (
-			<View>
+			<ScrollView onScroll={({nativeEvent}) => {
+				if (this.isGoingDown(nativeEvent.layoutMeasurement, nativeEvent.contentOffset, nativeEvent.contentSize) && !this.lastSlide()) {
+					const nextSlide = this.state.slides.length;
+					this.nextSlide(this.state.slidesId[nextSlide]);
+				}
+			}} style={styleMain.pagePadding}>
 				<Title title={this.state.title} />
 				<Description description={this.state.description} />
-				{this.state.slides.map((slide, index) => {
+				{this.state.slides.map((slide: SlideApiProps, index: number) => {
 					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} title={slide.image.name} image={slide.image.path} />;
 				})}
-			</View>
+			</ScrollView>
 		)
 	}
 
@@ -84,17 +91,10 @@ export default class ProjectZoom extends Component {
 
 	render = () => {
 		return (
-			<ScrollView onScroll={({nativeEvent}) => {
-				if (this.isGoingDown(nativeEvent) && !this.lastSlide()) {
-					const nextSlide = this.state.slides.length;
-					this.nextSlide(this.state.slidesId[nextSlide]);
-				}
-			}} style={styleMain.pagePadding}>
-				<View>
-					{this.props.loadingProject && this.renderLoading()}
-					{!this.props.loadingProject && this.renderProject()}
-				</View>
-			</ScrollView>
+			<View style={styleMain.pageContainer}>
+				{this.props.loadingProject && this.renderLoading()}
+				{!this.props.loadingProject && this.renderProject()}
+			</View>
 		);
 	}
 }

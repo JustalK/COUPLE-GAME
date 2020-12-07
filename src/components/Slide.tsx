@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {ActivityIndicator, StyleSheet, TouchableHighlight, Text, Image, View } from 'react-native'
 import Windows from './Windows'
+import {SlideProps, SlideStates} from '../interfaces/Slide'
 import Description from './Description'
 import { colors } from '../styles/colors'
 
-export default class Slide extends Component {
-	constructor(props) {
+export default class Slide extends Component<SlideProps, SlideStates> {
+	constructor(props: SlideProps) {
 		super(props);
 	}
 

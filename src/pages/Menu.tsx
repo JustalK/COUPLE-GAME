@@ -5,9 +5,11 @@ import Button from '../components/Button'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import ApiProject from '../services/ApiProject'
+import {MenuProps, MenuStates} from '../interfaces/Menu'
+import {ProjectsMenuProps} from '../interfaces/Projects'
 
-export default class Menu extends Component {
-	constructor(props) {
+export default class Menu extends Component<MenuProps, MenuStates> {
+	constructor(props: MenuProps) {
 		super(props);
 		this.state = {
 			projects: []
@@ -19,7 +21,7 @@ export default class Menu extends Component {
 	}
 
 	async getMenuInformations() {
-		const infos: PagesInformationProps[] = await ApiProject.getMenu();
+		const infos: ProjectsMenuProps[] = await ApiProject.getMenu();
 		this.setState({projects: infos})
 	}
 
