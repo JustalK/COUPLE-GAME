@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {ActivityIndicator, StyleSheet, TouchableHighlight, Text, Image, View } from 'react-native'
+import Windows from './Windows'
 import { colors } from '../styles/colors'
 
 export default class Slide extends Component {
@@ -10,10 +11,7 @@ export default class Slide extends Component {
 	render = () => {
 	  return (
 		<View>
-			<View style={styles.project}>
-				<Text style={styles.title}>{this.props.title}</Text>
-				<Image source={{uri: "http://justalk.online" + this.props.image}} style={styles.image} />
-			</View>
+			<Windows title={this.props.title} image={this.props.image} />
 			<Text style={styles.description}>{this.props.firstText}</Text>
 			<Text style={styles.description}>{this.props.secondText}</Text>
 		</View>
@@ -27,9 +25,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "center",
 	},
-	image: {
-		height: 200
-	},
 	description: {
 		fontSize: 20,
 		fontFamily: "LatoLight",
@@ -37,11 +32,6 @@ const styles = StyleSheet.create({
 		color: colors.cyan,
 		alignSelf: 'flex-start',
 		marginBottom: 50
-	},
-	project: {
-		borderWidth: 1,
-		borderColor: colors.black,
-		marginBottom: 30
 	},
 	title: {
 		fontFamily: "LatoBold",
