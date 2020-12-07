@@ -32,17 +32,5 @@ const styles = StyleSheet.create({
 		color: colors.cyan,
 		alignSelf: 'flex-start',
 		marginBottom: 50
-	},
-	title: {
-		fontFamily: "LatoBold",
-		backgroundColor: colors.clearBlue,
-		height: 40,
-		lineHeight: 40,
-		textTransform: "uppercase",
-		color: colors.white,
-		zIndex: 2,
-		textAlign: "center",
-		alignSelf: "stretch",
-
 	}
 })

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, TouchableHighlight, Text, Image, View } from 'react-native';
-import {ProjectsProps, ProjectsStates} from '../components/Project'
 import { colors } from '../styles/colors'
 
-export default class Windows extends Component<ProjectsProps, ProjectsStates> {
+export default class Windows extends Component {
 	constructor(props) {
 		super(props);
 	}

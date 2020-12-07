@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements'
 import Button from '../components/Button'
 import Loading from '../components/Loading'
 import Slide from '../components/Slide'
+import Title from '../components/Title'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import ApiProject from '../services/ApiProject'
@@ -67,7 +68,7 @@ export default class ProjectZoom extends Component {
 	renderProject() {
 		return (
 			<View>
-				<Text style={styles.title}>{this.state.title}</Text>
+				<Title title={this.state.title} />
 				<Text style={styles.description}>{this.state.description}</Text>
 				{this.state.slides.map((slide, index) => {
 					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} title={slide.image.name} image={slide.image.path} />;
@@ -98,16 +99,6 @@ export default class ProjectZoom extends Component {
 }
 
 const styles = StyleSheet.create({
-	title: {
-		marginTop: 40,
-		fontSize: 50,
-		fontWeight: "bold",
-		fontFamily: "LatoLight",
-		textAlign: "center",
-		color: colors.white,
-		textTransform: "uppercase",
-		marginBottom: 40
-	},
 	description: {
 		fontSize: 20,
 		fontFamily: "LatoLight",
