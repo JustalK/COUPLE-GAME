@@ -1,4 +1,4 @@
 export interface PagesInformationProps {
-	title: string,
-	description: string
+	title: string;
+	description: string;
 }

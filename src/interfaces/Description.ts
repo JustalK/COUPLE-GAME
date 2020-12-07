@@ -1,5 +1,3 @@
 export interface DescriptionProps {
-	description: string,
+	description: string;
 }
-
-export interface DescriptionStates {}

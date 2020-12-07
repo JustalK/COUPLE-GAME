@@ -1,47 +1,50 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '../styles/colors'
-import {WrittingEffectProps, WrittingEffectStates} from '../interfaces/WrittingEffect'
+import { colors } from '../styles/colors';
+import { WrittingEffectProps, WrittingEffectStates } from '../interfaces/WrittingEffect';
 
 export default class WritingEffect extends Component<WrittingEffectProps, WrittingEffectStates> {
 	constructor(props: WrittingEffectProps) {
-		super(props)
+		super(props);
 		this.state = {
-			fullText: "",
-			indexArray: 0
-		}
+			fullText: '',
+			indexArray: 0,
+		};
 	}
 
-	componentDidMount() {
+	componentDidMount(): void {
 		setTimeout(() => {
-			this.writing(this.state.fullText, this.state.indexArray)
+			this.writing(this.state.fullText, this.state.indexArray);
 		}, 100);
 	}
 
-	writing(actualText: string, indexActualArray: number) {
+	writing(actualText: string, indexActualArray: number): void {
 		const i = actualText.length;
 		if (i < this.props.data[indexActualArray].length) {
-			const newFullText = actualText  + this.props.data[indexActualArray].charAt(i);
-			this.setState({fullText: newFullText})
+			const newFullText = actualText + this.props.data[indexActualArray].charAt(i);
+			this.setState({ fullText: newFullText });
 			setTimeout(() => {
-				this.writing(newFullText, indexActualArray)
+				this.writing(newFullText, indexActualArray);
 			}, 30);
 		} else {
 			setTimeout(() => {
-				const newIndexArray = (indexActualArray + 1) % this.props.data.length
+				const newIndexArray = (indexActualArray + 1) % this.props.data.length;
 				this.setState({
 					indexArray: newIndexArray,
-					fullText: ""
-				})
-				this.writing("", newIndexArray);
+					fullText: '',
+				});
+				this.writing('', newIndexArray);
 			}, 1000);
 		}
 	}
 
-	render = () => {
+	render(): JSX.Element {
 		return (
 			<View>
-				<Text style={this.props.style as {}}>{this.props.predata} <Text style={{...this.props.style as {}, ...styles.textStyle}}>{this.state.fullText}</Text></Text>
+				<Text style={this.props.style as {}}>
+					{this.props.predata}{' '}
+					<Text style={{ ...(this.props.style as {}), ...styles.textStyle }}>{this.state.fullText}</Text>
+				</Text>
 			</View>
 		);
 	}
@@ -51,6 +54,6 @@ const styles = StyleSheet.create({
 	textStyle: {
 		borderRightWidth: 2,
 		borderColor: colors.white,
-		color: colors.white
-	}
+		color: colors.white,
+	},
 });

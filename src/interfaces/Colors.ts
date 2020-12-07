@@ -1,3 +1,3 @@
 export interface ColorsProps {
-	[key: string]: string
+	[key: string]: string;
 }

@@ -1,5 +1,3 @@
 export interface TitleProps {
-	title: string
+	title: string;
 }
-
-export interface TitleStates {}

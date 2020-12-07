@@ -1,12 +1,12 @@
-import {StyleProp, ViewStyle} from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 
 export interface WrittingEffectProps {
-	data: string[],
-	predata: string,
-	style?: StyleProp<ViewStyle>
+	data: string[];
+	predata: string;
+	style?: StyleProp<ViewStyle>;
 }
 
 export interface WrittingEffectStates {
-	fullText: string
-	indexArray: number
+	fullText: string;
+	indexArray: number;
 }

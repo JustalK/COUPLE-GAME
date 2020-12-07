@@ -1,4 +1,4 @@
 export interface ContactProps {
-	fullname: string
-	email: string
+	fullname: string;
+	email: string;
 }

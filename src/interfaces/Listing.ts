@@ -1,20 +1,20 @@
-import {PagesInformationProps} from './Pages'
-import {ProjectsInformationProps} from './Projects'
+import { PagesInformationProps } from './Pages';
+import { ProjectsInformationProps } from './Projects';
 
 export interface RouteNavProps {
-	name: string
+	name: string;
 }
 
 export interface ListingProps {
-	updateIdProject(id: string): void
-	jumpTo(route: string): void
+	updateIdProject(id: string): void;
+	jumpTo(route: string): void;
 }
 
 export interface ListingStates {
-	informations: PagesInformationProps
-	projects: ProjectsInformationProps[]
-	loadMore: boolean
-	loading: boolean
-	pageLimit: number
-	page: number
+	informations: PagesInformationProps;
+	projects: ProjectsInformationProps[];
+	loadMore: boolean;
+	loading: boolean;
+	pageLimit: number;
+	page: number;
 }

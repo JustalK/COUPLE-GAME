@@ -1,30 +1,29 @@
-import { StyleSheet } from "react-native";
-import { colors } from './colors'
-import { ViewStyle } from "react-native";
+import { StyleSheet } from 'react-native';
+import { colors } from './colors';
 
 export const styleText = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: colors.darkBlue,
-		alignItems: "center",
-		justifyContent: "center",
-	}
-})
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+});
 
 export const styleMain = StyleSheet.create({
 	homeContainer: {
 		flex: 1,
-		flexDirection: "column",
+		flexDirection: 'column',
 		backgroundColor: colors.darkBlue,
-		alignItems: "center",
-		justifyContent: "center",
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	pageContainer: {
 		flex: 1,
-		flexDirection: "column",
-		backgroundColor: colors.darkBlue
+		flexDirection: 'column',
+		backgroundColor: colors.darkBlue,
 	},
 	pagePadding: {
-		padding: 20
-	}
-})
+		padding: 20,
+	},
+});

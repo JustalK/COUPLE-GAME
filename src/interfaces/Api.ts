@@ -1,3 +1,3 @@
 export interface ApiDataProps {
-	data: any
+	data: any;
 }

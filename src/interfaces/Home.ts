@@ -1,10 +1,10 @@
 export interface HomeProps {
-	navigation: any
+	navigation: any;
 }
 
 export interface HomeStates {
-	fullname: string
-	email: string
-	jobs: string[],
-	loading: boolean
+	fullname: string;
+	email: string;
+	jobs: string[];
+	loading: boolean;
 }

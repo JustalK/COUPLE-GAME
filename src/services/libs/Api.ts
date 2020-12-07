@@ -1,15 +1,14 @@
-import axios from 'axios';
-import React, { Component } from 'react';
-import { ApiDataProps } from '../../interfaces/Api'
-import { apiConfig } from './ApiConfig'
+import axios, { AxiosResponse } from 'axios';
+import { Component } from 'react';
+import { ApiDataProps } from '../../interfaces/Api';
+import { apiConfig } from './ApiConfig';
 
 export default class Api extends Component {
-
-	static get = (url: string) => {
+	static get<T, R = AxiosResponse<T>>(url: string): Promise<R> {
 		return axios.get(apiConfig.api_url + url);
 	}
 
-	static success: any = (response: ApiDataProps) => {
+	static success<T>(response: ApiDataProps): T {
 		return response.data;
 	}
 }

@@ -1,4 +1,4 @@
 export interface ImageProps {
-	name: string
-	path: string
+	name: string;
+	path: string;
 }

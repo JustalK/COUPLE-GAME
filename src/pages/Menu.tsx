@@ -1,37 +1,45 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, Image, View, ScrollView, TouchableWithoutFeedback } from "react-native";
-import { Icon } from 'react-native-elements'
-import Button from '../components/Button'
-import { colors } from '../styles/colors'
-import { styleText, styleMain } from '../styles/main'
-import ApiProject from '../services/ApiProject'
-import {MenuProps, MenuStates} from '../interfaces/Menu'
-import {ProjectsMenuProps} from '../interfaces/Projects'
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import Button from '../components/Button';
+import { colors } from '../styles/colors';
+import ApiProject from '../services/ApiProject';
+import { MenuProps, MenuStates } from '../interfaces/Menu';
+import { ProjectsMenuProps } from '../interfaces/Projects';
 
 export default class Menu extends Component<MenuProps, MenuStates> {
 	constructor(props: MenuProps) {
 		super(props);
 		this.state = {
-			projects: []
-		}
+			projects: [],
+		};
 	}
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		await this.getMenuInformations();
 	}
 
-	async getMenuInformations() {
+	async getMenuInformations(): Promise<void> {
 		const infos: ProjectsMenuProps[] = await ApiProject.getMenu();
-		this.setState({projects: infos})
+		this.setState({ projects: infos });
 	}
 
-	render = () => {
+	render(): JSX.Element {
 		return (
 			<ScrollView>
 				<View style={styles.section}>
 					<Text style={styles.title}>Projects</Text>
 					{this.state.projects.map((project, index) => {
-						return <Button key={index} updateIdProject={this.props.updateIdProject} jumpTo={this.props.jumpTo} idProject={project.id} index={index} slug={project.slug} buttonTitle={project.title} />
+						return (
+							<Button
+								key={index}
+								updateIdProject={this.props.updateIdProject}
+								jumpTo={this.props.jumpTo}
+								idProject={project.id}
+								index={index}
+								slug={project.slug}
+								buttonTitle={project.title}
+							/>
+						);
 					})}
 				</View>
 			</ScrollView>
@@ -41,30 +49,15 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 
 const styles = StyleSheet.create({
 	section: {
-		marginBottom: 50
+		marginBottom: 50,
 	},
 	title: {
 		fontSize: 18,
 		lineHeight: 40,
-		fontFamily: "LatoBold",
-		textAlign: "left",
+		fontFamily: 'LatoBold',
+		textAlign: 'left',
 		margin: 20,
 		color: colors.cyan,
-		textTransform: "uppercase"
+		textTransform: 'uppercase',
 	},
-	button: {
-		borderRadius: 0,
-		backgroundColor: colors.cyan,
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		padding: 20
-	},
-	buttonText: {
-		fontSize: 18,
-		fontFamily: "LatoBold",
-		textTransform: "capitalize",
-		color: colors.white,
-		lineHeight: 40
-	}
 });

@@ -1,6 +1,4 @@
 export interface WindowsProps {
-	title: string
-	image: string
+	title: string;
+	image: string;
 }
-
-export interface WindowsStates {}
