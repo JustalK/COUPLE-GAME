@@ -7,6 +7,7 @@ import Project from '../components/Project'
 import HeaderApp from '../components/HeaderApp'
 import Loading from '../components/Loading'
 import Title from '../components/Title'
+import Description from '../components/Description'
 import ApiPage from '../services/ApiPage'
 import ApiProject from '../services/ApiProject'
 import {PagesInformationProps} from '../interfaces/Pages'
@@ -88,7 +89,7 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 				}
 			}} style={styleMain.pagePadding}>
 				<Title title={this.state.informations.title} />
-				<Text style={styles.description}>{this.state.informations.description}</Text>
+				<Description description={this.state.informations.description} />
 				{this.state.projects.map((project, index) => {
 					return <Project image={project.images[0].path} updateIdProject={this.props.updateIdProject} jumpTo={this.props.jumpTo} id={project._id} title={project.title} key={index}></Project>;
 				})}
@@ -99,8 +100,6 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	}
 
 	render = () => {
-		console.log("LL");
-
 		return (
 			<View style={styleMain.pageContainer}>
 				{this.state.loading && this.renderLoading()}
@@ -112,14 +111,6 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 }
 
 const styles = StyleSheet.create({
-	description: {
-		fontSize: 20,
-		fontFamily: "LatoLight",
-		textAlign: "center",
-		color: colors.cyan,
-		alignSelf: 'flex-start',
-		marginBottom: 50
-	},
 	end: {
 		fontSize: 20,
 		fontFamily: "LatoLight",

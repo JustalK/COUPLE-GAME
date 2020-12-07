@@ -11,7 +11,6 @@ import {HomeProps, HomeStates} from '../interfaces/Home'
 import ApiContact from '../services/ApiContact'
 import ApiJob from '../services/ApiJob'
 
-const jobs = ["Fullstack Developer", "Backend Developer", "Frontend Developer"];
 export default class Home extends Component<HomeProps, HomeStates> {
 	constructor(props: HomeProps) {
 		super(props);

@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import Loading from '../components/Loading'
 import Slide from '../components/Slide'
 import Title from '../components/Title'
+import Description from '../components/Description'
 import { colors } from '../styles/colors'
 import { styleText, styleMain } from '../styles/main'
 import ApiProject from '../services/ApiProject'
@@ -69,7 +70,7 @@ export default class ProjectZoom extends Component {
 		return (
 			<View>
 				<Title title={this.state.title} />
-				<Text style={styles.description}>{this.state.description}</Text>
+				<Description description={this.state.description} />
 				{this.state.slides.map((slide, index) => {
 					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} title={slide.image.name} image={slide.image.path} />;
 				})}
@@ -97,14 +98,3 @@ export default class ProjectZoom extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	description: {
-		fontSize: 20,
-		fontFamily: "LatoLight",
-		textAlign: "center",
-		color: colors.cyan,
-		alignSelf: 'flex-start',
-		marginBottom: 50
-	}
-});
