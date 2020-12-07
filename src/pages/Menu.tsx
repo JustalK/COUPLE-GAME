@@ -26,18 +26,8 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 	}
 
 	render = () => {
-		const aboutMe = [{
-			buttonTitle: "Button 1"
-		}]
-
 		return (
 			<ScrollView>
-				<View style={styles.section}>
-					<Text style={styles.title}>About me</Text>
-					{aboutMe.map((button, index) => {
-						return <Button key={index} index={index} buttonTitle={button.buttonTitle} />
-					})}
-				</View>
 				<View style={styles.section}>
 					<Text style={styles.title}>Projects</Text>
 					{this.state.projects.map((project, index) => {

@@ -8,8 +8,6 @@ export interface RouteNavProps {
 export interface ListingProps {
 	updateIdProject(id: string): void
 	jumpTo(route: string): void
-	route: RouteNavProps
-	navigation: any
 }
 
 export interface ListingStates {
