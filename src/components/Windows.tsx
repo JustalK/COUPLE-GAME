@@ -3,7 +3,7 @@ import { StyleSheet, Text, Image, View } from 'react-native';
 import { WindowsProps } from '../interfaces/Windows';
 import { colors } from '../styles/colors';
 
-export default class Windows extends Component<WindowsProps, {}> {
+export default class Windows extends Component<WindowsProps, never> {
 	constructor(props: WindowsProps) {
 		super(props);
 	}

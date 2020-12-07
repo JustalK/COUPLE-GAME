@@ -9,7 +9,7 @@ export interface PortfolioProps {
 	updateIdProject(id: string): void;
 	jumpTo(route: string): void;
 	route: RouteNavProps;
-	navigation: any;
+	navigation: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface PortfolioStates {

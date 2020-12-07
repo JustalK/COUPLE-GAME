@@ -34,6 +34,6 @@ export default class BlinkingEffect extends Component<BlinkingEffectProps, Blink
 	render(): JSX.Element {
 		const opacity = { opacity: this.state.fadeValue };
 
-		return <Animated.View style={[this.props.style as {}, opacity]}>{this.props.children}</Animated.View>;
+		return <Animated.View style={[this.props.style as {}, opacity]}>{this.props.children}</Animated.View>; // eslint-disable-line @typescript-eslint/ban-types
 	}
 }

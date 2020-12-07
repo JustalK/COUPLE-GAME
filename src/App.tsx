@@ -57,8 +57,8 @@ const customFonts = {
 	Heebo: require('../assets/fonts/Heebo-Bold.ttf'),
 };
 
-export default class App extends Component<{}, AppStates> {
-	constructor(props: {}) {
+export default class App extends Component<unknown, AppStates> {
+	constructor(props: unknown) {
 		super(props);
 		this.state = {
 			fontsLoaded: false,
@@ -75,16 +75,8 @@ export default class App extends Component<{}, AppStates> {
 			return (
 				<NavigationContainer>
 					<Stack.Navigator>
-						<Stack.Screen
-							name="Home"
-							component={Home}
-							options={{ headerShown: false, cardStyleInterpolator: forSlide }}
-						/>
-						<Stack.Screen
-							name="Portfolio"
-							component={Portfolio}
-							options={{ headerShown: false, cardStyleInterpolator: forSlide }}
-						/>
+						<Stack.Screen name="Home" component={Home} options={{ headerShown: false, cardStyleInterpolator: forSlide }} />
+						<Stack.Screen name="Portfolio" component={Portfolio} options={{ headerShown: false, cardStyleInterpolator: forSlide }} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			);

@@ -1,5 +1,5 @@
 export interface HomeProps {
-	navigation: any;
+	navigation: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface HomeStates {

@@ -1,14 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import {
-	ActivityIndicator,
-	Text,
-	View,
-	ScrollView,
-	StyleSheet,
-	NativeScrollSize,
-	NativeScrollPoint,
-} from 'react-native';
+import { ActivityIndicator, Text, View, ScrollView, StyleSheet, NativeScrollSize, NativeScrollPoint } from 'react-native';
 import { styleMain } from '../styles/main';
 import { colors } from '../styles/colors';
 import Project from '../components/Project';
@@ -56,14 +48,15 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 
 	async getProjectsInformations(page: number): Promise<void> {
 		const projects: ProjectsInformationProps[] = await ApiProject.getProject(page);
-		this.setState({ projects: [...this.state.projects, ...projects], page: page, loadMore: true, loading: false });
+		this.setState({
+			projects: [...this.state.projects, ...projects],
+			page: page,
+			loadMore: true,
+			loading: false,
+		});
 	}
 
-	isGoingDown(
-		layoutMeasurement: NativeScrollSize,
-		contentOffset: NativeScrollPoint,
-		contentSize: NativeScrollSize,
-	): boolean {
+	isGoingDown(layoutMeasurement: NativeScrollSize, contentOffset: NativeScrollPoint, contentSize: NativeScrollSize): boolean {
 		if (this.state.loadMore && layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000) {
 			this.setState({ loadMore: false });
 			return true;
@@ -96,10 +89,7 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 		return (
 			<ScrollView
 				onScroll={({ nativeEvent }) => {
-					if (
-						this.isGoingDown(nativeEvent.layoutMeasurement, nativeEvent.contentOffset, nativeEvent.contentSize) &&
-						!this.endOfPage()
-					) {
+					if (this.isGoingDown(nativeEvent.layoutMeasurement, nativeEvent.contentOffset, nativeEvent.contentSize) && !this.endOfPage()) {
 						const nextPage = this.state.page + 1;
 						this.getProjectsInformations(nextPage);
 					}
@@ -109,16 +99,7 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 				<Title title={this.state.informations.title} />
 				<Description description={this.state.informations.description} />
 				{this.state.projects.map((project, index) => {
-					return (
-						<Project
-							image={project.images[0].path}
-							updateIdProject={this.props.updateIdProject}
-							jumpTo={this.props.jumpTo}
-							id={project._id}
-							title={project.title}
-							key={index}
-						></Project>
-					);
+					return <Project image={project.images[0].path} updateIdProject={this.props.updateIdProject} jumpTo={this.props.jumpTo} id={project._id} title={project.title} key={index}></Project>;
 				})}
 				{this.state.loadMore && this.renderLoadingMore()}
 				{this.endOfPage() && this.renderEndOfPage()}

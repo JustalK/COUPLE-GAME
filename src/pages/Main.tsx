@@ -40,14 +40,7 @@ export default class Main extends Component<unknown, MainStates> {
 			case 'listing':
 				return <Listing updateIdProject={(id: string) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'project':
-				return (
-					<ProjectZoom
-						loadingProject={this.state.loadingProject}
-						projectLoaded={() => this.projectLoaded()}
-						idProject={this.state.idProject}
-						jumpTo={jumpTo}
-					/>
-				);
+				return <ProjectZoom loadingProject={this.state.loadingProject} projectLoaded={() => this.projectLoaded()} idProject={this.state.idProject} jumpTo={jumpTo} />;
 		}
 	}
 
@@ -56,14 +49,6 @@ export default class Main extends Component<unknown, MainStates> {
 	}
 
 	render(): JSX.Element {
-		return (
-			<TabView
-				navigationState={this.state}
-				renderScene={(rs) => this.renderScene(rs.route, rs.jumpTo)}
-				renderTabBar={() => null}
-				onIndexChange={(index) => this.updateIndex(index)}
-				initialLayout={this.initialLayout()}
-			/>
-		);
+		return <TabView navigationState={this.state} renderScene={(rs) => this.renderScene(rs.route, rs.jumpTo)} renderTabBar={() => null} onIndexChange={(index) => this.updateIndex(index)} initialLayout={this.initialLayout()} />;
 	}
 }

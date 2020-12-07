@@ -26,7 +26,12 @@ export default class Home extends Component<HomeProps, HomeStates> {
 		const identity = await ApiContact.getMyContact();
 		const jobs = await ApiJob.getJobs();
 		const jobs_title = jobs.map((job) => job.title);
-		this.setState({ fullname: identity.fullname, email: identity.email, jobs: jobs_title, loading: false });
+		this.setState({
+			fullname: identity.fullname,
+			email: identity.email,
+			jobs: jobs_title,
+			loading: false,
+		});
 	}
 
 	renderHome(): JSX.Element {
@@ -34,7 +39,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 			<View>
 				<Image style={styles.portrait} source={profileImg} />
 				<Text style={styles.textStyle}>Hello World, Im {this.state.fullname}</Text>
-				<WritingEffect style={styles.textStyle as {}} predata="Im a" data={this.state.jobs}></WritingEffect>
+				<WritingEffect style={styles.textStyle} predata="Im a" data={this.state.jobs}></WritingEffect>
 				<Text style={styles.textStyle}>If any questions, contact me at {this.state.email}</Text>
 				<BlinkingEffect>
 					<Text style={styles.intructions}>Press the screen</Text>
@@ -62,6 +67,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 
 const styles = StyleSheet.create({
 	textStyle: {
+		margin: 0,
 		fontSize: 18,
 		fontFamily: 'LatoLight',
 		textAlign: 'center',

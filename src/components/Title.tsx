@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { TitleProps } from '../interfaces/Title';
 import { colors } from '../styles/colors';
 
-export default class Title extends Component<TitleProps, {}> {
+export default class Title extends Component<TitleProps, never> {
 	constructor(props: TitleProps) {
 		super(props);
 	}

@@ -17,7 +17,10 @@ export default class HeaderApp extends Component<HeaderAppProps, never> {
 		return (
 			<Header
 				leftComponent={{ icon: 'menu', size: 40, ...styles.button }}
-				centerComponent={{ ...{ text: this.props.title }, ...{ style: styles.title } }}
+				centerComponent={{
+					...{ text: this.props.title },
+					...{ style: styles.title },
+				}}
 				rightComponent={{
 					icon: 'home',
 					size: 40,
