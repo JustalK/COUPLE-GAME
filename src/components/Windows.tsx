@@ -22,10 +22,13 @@ const styles = StyleSheet.create({
 	project: {
 		borderWidth: 1,
 		borderColor: colors.black,
-		marginBottom: 30,
+		marginBottom: 50,
+		borderRadius: 20
 	},
 	image: {
 		height: 200,
+		borderBottomRightRadius: 20,
+		borderBottomLeftRadius: 20
 	},
 	title: {
 		fontFamily: 'LatoBold',
@@ -37,5 +40,7 @@ const styles = StyleSheet.create({
 		zIndex: 2,
 		textAlign: 'center',
 		alignSelf: 'stretch',
+		borderTopRightRadius: 20,
+		borderTopLeftRadius: 20
 	},
 });

@@ -38,9 +38,9 @@ export default class Home extends Component<HomeProps, HomeStates> {
 		return (
 			<View>
 				<Image style={styles.portrait} source={profileImg} />
-				<Text style={styles.textStyle}>Hello World, Im {this.state.fullname}</Text>
-				<WritingEffect style={styles.textStyle} predata="Im a" data={this.state.jobs}></WritingEffect>
-				<Text style={styles.textStyle}>If any questions, contact me at {this.state.email}</Text>
+				<Text style={styles.textStyle}>Hello World, I'm <Text style={styles.fullname}>{this.state.fullname}</Text></Text>
+				<WritingEffect style={styles.textStyle} predata="I'm a" data={this.state.jobs}></WritingEffect>
+				<Text style={styles.textStyle}>For inquiries, contact me at {this.state.email}</Text>
 				<BlinkingEffect>
 					<Text style={styles.intructions}>Press the screen</Text>
 				</BlinkingEffect>
@@ -54,7 +54,7 @@ export default class Home extends Component<HomeProps, HomeStates> {
 
 	render(): JSX.Element {
 		return (
-			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Portfolio')}>
+			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('JustalK')}>
 				<View style={styleMain.homeContainer}>
 					{this.state.loading && this.renderLoading()}
 					{!this.state.loading && this.renderHome()}
@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
 		fontFamily: 'LatoLight',
 		textAlign: 'center',
 		color: colors.cyan,
+	},
+	fullname: {
+		textTransform: 'capitalize'
 	},
 	portrait: {
 		width: 200,

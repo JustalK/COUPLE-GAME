@@ -75,8 +75,16 @@ export default class App extends Component<unknown, AppStates> {
 			return (
 				<NavigationContainer>
 					<Stack.Navigator>
-						<Stack.Screen name="Home" component={Home} options={{ headerShown: false, cardStyleInterpolator: forSlide }} />
-						<Stack.Screen name="Portfolio" component={Portfolio} options={{ headerShown: false, cardStyleInterpolator: forSlide }} />
+						<Stack.Screen
+							name="Home"
+							component={Home}
+							options={{ headerShown: false, cardStyleInterpolator: forSlide }}
+						/>
+						<Stack.Screen
+							name="JustalK"
+							component={Portfolio}
+							options={{ headerShown: false, cardStyleInterpolator: forSlide }}
+						/>
 					</Stack.Navigator>
 				</NavigationContainer>
 			);

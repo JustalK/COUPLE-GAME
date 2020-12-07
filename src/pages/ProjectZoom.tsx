@@ -58,7 +58,11 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		}
 	}
 
-	isGoingDown(layoutMeasurement: NativeScrollSize, contentOffset: NativeScrollPoint, contentSize: NativeScrollSize): boolean {
+	isGoingDown(
+		layoutMeasurement: NativeScrollSize,
+		contentOffset: NativeScrollPoint,
+		contentSize: NativeScrollSize,
+	): boolean {
 		if (this.state.loadMore && layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000) {
 			this.setState({ loadMore: false });
 			return true;
@@ -75,7 +79,14 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		return (
 			<ScrollView
 				onScroll={({ nativeEvent }) => {
-					if (this.isGoingDown(nativeEvent.layoutMeasurement, nativeEvent.contentOffset, nativeEvent.contentSize) && !this.lastSlide()) {
+					if (
+						this.isGoingDown(
+							nativeEvent.layoutMeasurement,
+							nativeEvent.contentOffset,
+							nativeEvent.contentSize,
+						) &&
+						!this.lastSlide()
+					) {
 						const nextSlide = this.state.slides.length;
 						this.nextSlide(this.state.slidesId[nextSlide]);
 					}
@@ -85,7 +96,15 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 				<Title title={this.state.title} />
 				<Description description={this.state.description} />
 				{this.state.slides.map((slide: SlideApiProps, index: number) => {
-					return <Slide key={index} firstText={slide.first_text} secondText={slide.second_text} title={slide.image.name} image={slide.image.path} />;
+					return (
+						<Slide
+							key={index}
+							firstText={slide.first_text}
+							secondText={slide.second_text}
+							title={slide.image.name}
+							image={slide.image.path}
+						/>
+					);
 				})}
 			</ScrollView>
 		);

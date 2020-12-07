@@ -16,14 +16,15 @@ export default class HeaderApp extends Component<HeaderAppProps, never> {
 	render(): JSX.Element {
 		return (
 			<Header
-				leftComponent={{ icon: 'menu', size: 40, ...styles.button }}
+				rightComponent={{ icon: 'envelope', type: 'font-awesome', size: 30, ...styles.button }}
 				centerComponent={{
 					...{ text: this.props.title },
 					...{ style: styles.title },
 				}}
-				rightComponent={{
+				leftComponent={{
 					icon: 'home',
-					size: 40,
+					type: 'font-awesome',
+					size: 30,
 					...styles.button,
 					onPress: () => {
 						this.backToHome();
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 20,
 		paddingBottom: 20,
 		borderBottomWidth: 1,
-		borderBottomColor: colors.cyan,
+		borderBottomColor: colors.darkBlue,
 	},
 	button: {
 		color: colors.cyan,

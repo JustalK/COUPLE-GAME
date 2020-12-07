@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import Listing from './Listing';
 import Menu from './Menu';
 import ProjectZoom from './ProjectZoom';
 import { MainStates, RouteProps } from '../interfaces/Main';
-import { TabView } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
+import { colors } from '../styles/colors';
 
 export default class Main extends Component<unknown, MainStates> {
 	constructor(props: unknown) {
@@ -14,7 +15,7 @@ export default class Main extends Component<unknown, MainStates> {
 			idProject: '5fcb294909c6720bc207e5a1',
 			routes: [
 				{ key: 'menu', title: 'Menu' },
-				{ key: 'listing', title: 'Listing' },
+				{ key: 'listing', title: 'Projects' },
 				{ key: 'project', title: 'Zoom' },
 			],
 			loadingProject: true,
@@ -33,6 +34,10 @@ export default class Main extends Component<unknown, MainStates> {
 		this.setState({ loadingProject: false });
 	}
 
+	renderTabBar(props: any): JSX.Element {
+		return <TabBar {...props} indicatorStyle={styles.indicator} style={styles.tabBar} />;
+	}
+
 	renderScene(route: RouteProps, jumpTo: (key: string) => void): JSX.Element | undefined {
 		switch (route.key) {
 			case 'menu':
@@ -40,7 +45,14 @@ export default class Main extends Component<unknown, MainStates> {
 			case 'listing':
 				return <Listing updateIdProject={(id: string) => this.updateIdProject(id)} jumpTo={jumpTo} />;
 			case 'project':
-				return <ProjectZoom loadingProject={this.state.loadingProject} projectLoaded={() => this.projectLoaded()} idProject={this.state.idProject} jumpTo={jumpTo} />;
+				return (
+					<ProjectZoom
+						loadingProject={this.state.loadingProject}
+						projectLoaded={() => this.projectLoaded()}
+						idProject={this.state.idProject}
+						jumpTo={jumpTo}
+					/>
+				);
 		}
 	}
 
@@ -49,6 +61,30 @@ export default class Main extends Component<unknown, MainStates> {
 	}
 
 	render(): JSX.Element {
-		return <TabView navigationState={this.state} renderScene={(rs) => this.renderScene(rs.route, rs.jumpTo)} renderTabBar={() => null} onIndexChange={(index) => this.updateIndex(index)} initialLayout={this.initialLayout()} />;
+		return (
+			<TabView
+				renderTabBar={this.renderTabBar}
+				navigationState={this.state}
+				renderScene={(rs) => this.renderScene(rs.route, rs.jumpTo)}
+				onIndexChange={(index) => this.updateIndex(index)}
+				initialLayout={this.initialLayout()}
+			/>
+		);
 	}
 }
+
+const styles = StyleSheet.create({
+	tabBar: {
+		backgroundColor: colors.clearBlue,
+		borderColor: colors.cyan,
+		borderWidth: 1,
+		borderRadius: 20,
+		margin: 20
+	},
+	indicator: {
+		backgroundColor: colors.white,
+		borderBottomColor: colors.cyan,
+		borderBottomWidth: 49,
+		borderRadius: 20
+	},
+});

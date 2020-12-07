@@ -25,7 +25,9 @@ export default class Button extends Component<ButtonProps, never> {
 					style={[
 						styles.button,
 						{
-							backgroundColor: this.checkIndexIsEven(this.props.index) ? colors.clearBlue : colors.darkBlue,
+							backgroundColor: this.checkIndexIsEven(this.props.index)
+								? colors.clearBlue
+								: colors.darkBlue,
 						},
 					]}
 				>
