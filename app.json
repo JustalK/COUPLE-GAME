@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "PORTFOLIO",
+    "name": "JUSTALK PORTFOLIO",
     "slug": "PORTFOLIO",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/me.jpeg",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
