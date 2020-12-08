@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { TouchableHighlight } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { ProjectsProps } from '../interfaces/Projects';
 import Windows from './Windows';
+import { colors } from '../styles/colors';
 
 export default class Project extends Component<ProjectsProps, never> {
 	constructor(props: ProjectsProps) {
@@ -15,9 +16,11 @@ export default class Project extends Component<ProjectsProps, never> {
 
 	render(): JSX.Element {
 		return (
-			<TouchableHighlight onPress={() => this.zoomProject(this.props.id)}>
-				<Windows title={this.props.title} image={this.props.image} />
-			</TouchableHighlight>
+			<TouchableOpacity onPress={() => this.zoomProject(this.props.id)}>
+				<View>
+					<Windows title={this.props.title} image={this.props.image} />
+				</View>
+			</TouchableOpacity>
 		);
 	}
 }

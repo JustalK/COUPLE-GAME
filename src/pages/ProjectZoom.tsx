@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, NativeScrollSize, NativeScrollPoint } from 'react-native';
+import { ActivityIndicator, Text, StyleSheet, View, ScrollView, NativeScrollSize, NativeScrollPoint } from 'react-native';
 import Loading from '../components/Loading';
 import Slide from '../components/Slide';
 import Title from '../components/Title';
@@ -10,6 +10,7 @@ import ApiProject from '../services/ApiProject';
 import ApiSlide from '../services/ApiSlide';
 import { ProjectZoomProps, ProjectZoomStates } from '../interfaces/ProjectZoom';
 import { SlideApiProps } from '../interfaces/Slide';
+import { colors } from '../styles/colors';
 
 export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoomStates> {
 	constructor(props: ProjectZoomProps) {
@@ -76,6 +77,22 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		return this.state.slides.length === this.state.slidesId.length;
 	}
 
+	renderEndOfPage(): JSX.Element {
+		return <Text style={styles.end}>You have reached the bottom of the page</Text>;
+	}
+
+	renderLoadingMore(): JSX.Element {
+		return (
+			<View style={styles.loaderPadding}>
+				<ActivityIndicator size="large" color={colors.white} />
+			</View>
+		);
+	}
+
+	renderLoading(): JSX.Element {
+		return <Loading />;
+	}
+
 	renderProject(): JSX.Element {
 		return (
 			<ScrollView
@@ -107,6 +124,8 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 						/>
 					);
 				})}
+				{this.state.loadMore && this.renderLoadingMore()}
+				{this.lastSlide() && this.renderEndOfPage()}
 			</ScrollView>
 		);
 	}
@@ -124,3 +143,18 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	end: {
+		fontSize: 20,
+		fontFamily: 'LatoLight',
+		textAlign: 'center',
+		color: colors.cyan,
+		alignSelf: 'center',
+		marginTop: 50,
+		marginBottom: 100,
+	},
+	loaderPadding: {
+		padding: 100,
+	},
+});

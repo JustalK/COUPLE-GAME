@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ButtonProps } from '../interfaces/Button';
 import { Icon } from 'react-native-elements';
 import { colors } from '../styles/colors';
@@ -20,7 +20,7 @@ export default class Button extends Component<ButtonProps, never> {
 
 	render(): JSX.Element {
 		return (
-			<TouchableWithoutFeedback onPress={() => this.zoomProject(this.props.idProject)}>
+			<TouchableOpacity onPress={() => this.zoomProject(this.props.idProject)}>
 				<View
 					style={[
 						styles.button,
@@ -34,7 +34,7 @@ export default class Button extends Component<ButtonProps, never> {
 					<Text style={styles.buttonText}>{this.props.buttonTitle}</Text>
 					<Icon name="chevron-right" type="evilicon" color={colors.white} />
 				</View>
-			</TouchableWithoutFeedback>
+			</TouchableOpacity>
 		);
 	}
 }

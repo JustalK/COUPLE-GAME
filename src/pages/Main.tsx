@@ -28,7 +28,9 @@ export default class Main extends Component<unknown, MainStates> {
 	}
 
 	updateIdProject(index: string): void {
-		this.setState({ idProject: index, loadingProject: true });
+		if(index !== this.state.idProject) {
+			this.setState({ idProject: index, loadingProject: true });
+		}
 	}
 
 	projectLoaded(): void {
