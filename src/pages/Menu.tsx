@@ -3,6 +3,7 @@ import { StyleSheet, TouchableWithoutFeedback, Text, View, ScrollView, Linking }
 import Button from '../components/Button';
 import { colors } from '../styles/colors';
 import ApiProject from '../services/ApiProject';
+import ApiContact from '../services/ApiContact';
 import { MenuProps, MenuStates } from '../interfaces/Menu';
 import { ProjectsMenuProps } from '../interfaces/Projects';
 import { Icon } from 'react-native-elements';
@@ -12,16 +13,14 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 		super(props);
 		this.state = {
 			projects: [],
+			email: ''
 		};
 	}
 
 	async componentDidMount(): Promise<void> {
-		await this.getMenuInformations();
-	}
-
-	async getMenuInformations(): Promise<void> {
 		const infos: ProjectsMenuProps[] = await ApiProject.getMenu();
-		this.setState({ projects: infos });
+		const identity = await ApiContact.getMyContact();
+		this.setState({ projects: infos, email: identity.email });
 	}
 
 	render(): JSX.Element {
@@ -30,14 +29,14 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 				<View style={styles.section}>
 					<Text style={styles.title}>Contact me</Text>
 					<TouchableWithoutFeedback
-						onPress={(): Promise<void> => Linking.openURL('mailto:justal.kevin@gmail.com')}>
+						onPress={(): Promise<void> => Linking.openURL('mailto:' + this.state.email)}>
 						<View style={styles.button}>
 							<Text style={styles.buttonText}>Send me an email</Text>
 							<Icon name="chevron-right" type="evilicon" color={colors.white} />
 						</View>
 					</TouchableWithoutFeedback>
 				</View>
-				<View style={styles.section}>
+				<View style={[styles.section, styles.end]}>
 					<Text style={styles.title}>Projects</Text>
 					{this.state.projects.map((project, index) => {
 						return (
@@ -60,7 +59,17 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 
 const styles = StyleSheet.create({
 	section: {
-		marginBottom: 50,
+		marginTop: 50,
+		marginRight: 20,
+		marginLeft: 20,
+		borderWidth: 1,
+		borderRadius: 20,
+		borderColor: colors.cyan
+	},
+	end: {
+		borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 0,
+		marginBottom: 50
 	},
 	button: {
 		borderRadius: 0,
@@ -69,6 +78,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		padding: 20,
+		borderBottomLeftRadius: 20,
+		borderBottomRightRadius: 20
 	},
 	buttonText: {
 		fontSize: 18,

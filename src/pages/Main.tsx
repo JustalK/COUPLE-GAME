@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import Listing from './Listing';
 import Menu from './Menu';
 import ProjectZoom from './ProjectZoom';
+import {FIRST_ID_PROJECT} from '../libs/constants';
 import { MainStates, RouteProps } from '../interfaces/Main';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { colors } from '../styles/colors';
@@ -12,7 +13,7 @@ export default class Main extends Component<unknown, MainStates> {
 		super(props);
 		this.state = {
 			index: 1,
-			idProject: '5fcb294909c6720bc207e5a1',
+			idProject: FIRST_ID_PROJECT,
 			routes: [
 				{ key: 'menu', title: 'Menu' },
 				{ key: 'listing', title: 'Projects' },
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
 		borderColor: colors.cyan,
 		borderWidth: 1,
 		borderRadius: 20,
-		margin: 20
+		marginRight: 20,
+		marginLeft: 20
 	},
 	indicator: {
 		backgroundColor: colors.white,

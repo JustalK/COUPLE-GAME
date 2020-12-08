@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { HeaderAppProps } from '../interfaces/HeaderApp';
+import { StyleSheet, Linking } from 'react-native';
+import ApiContact from '../services/ApiContact';
+import { HeaderAppProps, HeaderAppStates } from '../interfaces/HeaderApp';
 import { colors } from '../styles/colors';
 import { Header } from 'react-native-elements';
 
-export default class HeaderApp extends Component<HeaderAppProps, never> {
+export default class HeaderApp extends Component<HeaderAppProps, HeaderAppStates> {
 	constructor(props: HeaderAppProps) {
 		super(props);
+		this.state = {
+			email: ''
+		}
+	}
+
+	async componentDidMount(): Promise<void> {
+		const identity = await ApiContact.getMyContact();
+		this.setState({ email: identity.email });
 	}
 
 	backToHome(): void {
@@ -16,7 +25,9 @@ export default class HeaderApp extends Component<HeaderAppProps, never> {
 	render(): JSX.Element {
 		return (
 			<Header
-				rightComponent={{ icon: 'envelope', type: 'font-awesome', size: 30, ...styles.button }}
+				rightComponent={{ icon: 'envelope', type: 'font-awesome', size: 30, ...styles.button, onPress: (): Promise<void> => {
+					 Linking.openURL('mailto:' + this.state.email)}
+				 }}
 				centerComponent={{
 					...{ text: this.props.title },
 					...{ style: styles.title },

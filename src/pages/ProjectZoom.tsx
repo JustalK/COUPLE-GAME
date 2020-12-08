@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import Slide from '../components/Slide';
 import Title from '../components/Title';
 import Description from '../components/Description';
+import {FIRST_ID_PROJECT} from '../libs/constants';
 import { styleMain } from '../styles/main';
 import ApiProject from '../services/ApiProject';
 import ApiSlide from '../services/ApiSlide';
@@ -23,7 +24,7 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 	}
 
 	async componentDidMount(): Promise<void> {
-		await this.loadProject('5fcb294909c6720bc207e5a1');
+		await this.loadProject(FIRST_ID_PROJECT);
 	}
 
 	async loadProject(idProject: string): Promise<void> {

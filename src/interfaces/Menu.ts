@@ -7,4 +7,5 @@ export interface MenuProps {
 
 export interface MenuStates {
 	projects: ProjectsMenuProps[];
+	email: string;
 }

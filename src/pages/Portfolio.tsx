@@ -15,8 +15,8 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 		super(props);
 		this.state = {
 			informations: {
-				title: 'Loading',
-				description: 'Loading',
+				title: '',
+				description: '',
 			},
 			projects: [],
 			loadMore: true,
