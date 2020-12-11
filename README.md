@@ -4,7 +4,7 @@
 
 # PORTFOLIO-APP
 
-![Last version](https://img.shields.io/github/v/tag/justalk/portfolio.svg?style=flat-square)
+![Last version](https://img.shields.io/github/v/tag/justalk/portfolio-app.svg?style=flat-square)
 [![Travis](https://img.shields.io/travis/com/justalk/portfolio.svg?style=flat-square)](https://travis-ci.com/github/JustalK/portfolio)
 [![Coverage Status](https://coveralls.io/repos/github/JustalK/PORTFOLIO/badge.svg?branch=master&style=flat-square)](https://coveralls.io/github/JustalK/PORTFOLIO?branch=master)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/45c256d13f79636ec78f/maintainability)](https://codeclimate.com/github/JustalK/PORTFOLIO/maintainability)
@@ -15,9 +15,64 @@ The entire project follow the official convention for JS. Also, the project is c
 
 This project is linked to my other repository [PORTFOLIO](https://github.com/JustalK/PORTFOLIO). It's where I have designed the backend.
 
+## Commands
+
+#### Developing
+
+For running the project, simply use :
+
+```
+npm run start
+```
+
+It will then run a browser with a QR code that you can use on expo for testing the app.
+
+#### Tools
+
+For linting the code :
+```
+npm run lint
+```
+
+For formatting the code :
+```
+npm run format
+```
+
+#### Building
+
+For building an apk or app-bundle that could be use on Google Store or Apple Store :
+```
+npm run build-android
+npm run build-ios
+```
+
 ## Organization
 
-The following describe how the project is structured. It's an easy way for discovering the project and the way I organize the code. 
+The following describe how the project is structured. It's an easy way for discovering the project and the way I organize the code.
+
+#### Dependencies
+
+| Package's Name             | Description                                              |
+| :------------------------- | :------------------------------------------------------- |
+| axios                      | I use this package for calling the rest API (my backend) |
+| expo                       | I use expo for easy testing through my real device. I also use it for creating a apk build or app-bundle                                                  |
+| expo-font                  | Use for having access to the custom font inside expo     |
+| expo-status-bar            | Use for having access to the status bar inside expo      |
+| react                      | For being able to use the react technology               |
+| react-dom                  | Use for having access to the DOM of react                |
+| react-native               | Use for having access to android functionalities         |
+| react-native-tab-view      | Use for having a beautiful way to handle the tabs system between the different screen                                                                    |
+| @babel                     | Use for transpiling the entire code                      |
+| @types/x                   | For adding certain definition for Typescript             |
+| babel-eslint               | Pass the result of babel into eslint                     |
+| eslint                     | The linter of the entire code                            |
+| eslint-plugin-react        | Add the linting rules of react to the eslint             |
+| eslint-plugin-react-native | Add the linting rules of react-native to the eslint      |
+| eslint-plugin-prettier     | Add the linting rules of prettier to the eslint          |
+| typescript                 | For typing JS and avoiding future error                  |
+| prettier                   | For formatting the entire code                           |
+| eslint-config-prettier     | For adding the recommended config of prettier            |
 
 #### Organization of the folder
 
@@ -30,3 +85,7 @@ The following describe how the project is structured. It's an easy way for disco
 | pages         | Regroup the screens of the App                   |
 | services      | Regroup the call to the Api                      |
 | styles        | Regroup the less styles of the App               |
+
+## License
+
+MIT - Copyright &copy; [JUSTAL Kevin](http://justalk.online/)
