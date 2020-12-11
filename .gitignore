@@ -9,6 +9,9 @@ npm-debug.*
 *.orig.*
 web-build/
 
+.nyc_output
+coverage
+
 # macOS
 .DS_Store
 

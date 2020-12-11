@@ -8,9 +8,10 @@
     "build-android": "tsc && expo build:android",
     "build-ios": "tsc && expo build:ios",
     "eject": "expo eject",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint --fix './src/**/*.{ts,tsx}'",
-    "format": "prettier --write './src/**/*.{ts,tsx}'"
+    "format": "prettier --write './src/**/*.{ts,tsx}'",
+    "coverage": "coveralls < coverage/lcov.info"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -18,12 +19,14 @@
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "axios": "^0.21.0",
+    "coveralls": "^3.1.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.2.0",
     "expo": "~39.0.2",
     "expo-font": "~8.3.0",
     "expo-status-bar": "~1.0.2",
     "jest-expo": "^40.0.1",
+    "nyc": "^15.1.0",
     "react": "^16.13.1",
     "react-dom": "16.13.1",
     "react-native": "^0.63.2",
