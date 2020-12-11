@@ -25,7 +25,7 @@ export default class HeaderApp extends Component<HeaderAppProps, HeaderAppStates
 	render(): JSX.Element {
 		return (
 			<Header
-				rightComponent={{ icon: 'envelope', type: 'font-awesome', size: 30, ...styles.button, onPress: (): Promise<void> => {
+				rightComponent={{ icon: 'envelope', type: 'font-awesome', size: 30, ...styles.button, onPress: (): void => {
 					 Linking.openURL('mailto:' + this.state.email)}
 				 }}
 				centerComponent={{

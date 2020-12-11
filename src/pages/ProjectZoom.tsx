@@ -130,10 +130,6 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		);
 	}
 
-	renderLoading(): JSX.Element {
-		return <Loading />;
-	}
-
 	render(): JSX.Element {
 		return (
 			<View style={styleMain.pageContainer}>

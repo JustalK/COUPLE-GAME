@@ -4,29 +4,30 @@
     "slug": "PORTFOLIO",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/me.jpeg",
+    "icon": "./assets/me.png",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#111116"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.justalk.portfolio"
     },
     "android": {
+      "package": "com.justalk.portfolio",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#111116"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/me.png"
     }
   }
 }
