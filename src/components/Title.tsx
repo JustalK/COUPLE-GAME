@@ -4,9 +4,6 @@ import { TitleProps } from '../interfaces/Title';
 import { colors } from '../styles/colors';
 
 export default class Title extends Component<TitleProps, never> {
-	constructor(props: TitleProps) {
-		super(props);
-	}
 
 	render(): JSX.Element {
 		return <Text style={styles.title}>{this.props.title}</Text>;

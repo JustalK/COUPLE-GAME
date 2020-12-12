@@ -5,9 +5,6 @@ import { SlideProps } from '../interfaces/Slide';
 import Description from './Description';
 
 export default class Slide extends Component<SlideProps, never> {
-	constructor(props: SlideProps) {
-		super(props);
-	}
 
 	render(): JSX.Element {
 		return (

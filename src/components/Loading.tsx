@@ -3,9 +3,6 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/colors';
 
 export default class Loading extends Component<unknown, never> {
-	constructor(props: unknown) {
-		super(props);
-	}
 
 	render(): JSX.Element {
 		return (

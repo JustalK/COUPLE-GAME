@@ -14,6 +14,8 @@ import { colors } from '../styles/colors';
 import { isGoingDown } from '../libs/utils';
 
 export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoomStates> {
+	isGoingDown = isGoingDown.bind(this);
+
 	constructor(props: ProjectZoomProps) {
 		super(props);
 		this.state = {
@@ -23,8 +25,6 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 			slidesId: [],
 			slides: [],
 		};
-
-		this.isGoingDown = isGoingDown.bind(this);
 	}
 
 	async componentDidMount(): Promise<void> {

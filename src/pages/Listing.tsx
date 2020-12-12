@@ -23,6 +23,8 @@ import { ListingProps, ListingStates } from '../interfaces/Listing';
 import { isGoingDown } from '../libs/utils';
 
 export default class Portfolio extends Component<ListingProps, ListingStates> {
+	isGoingDown = isGoingDown.bind(this);
+
 	constructor(props: ListingProps) {
 		super(props);
 		this.state = {
@@ -37,7 +39,6 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 			page: 0,
 		};
 
-		this.isGoingDown = isGoingDown.bind(this);
 	}
 
 	async componentDidMount(): Promise<void> {

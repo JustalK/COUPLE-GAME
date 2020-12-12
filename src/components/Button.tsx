@@ -5,9 +5,6 @@ import { Icon } from 'react-native-elements';
 import { colors } from '../styles/colors';
 
 export default class Button extends Component<ButtonProps, never> {
-	constructor(props: ButtonProps) {
-		super(props);
-	}
 
 	checkIndexIsEven(n: number): boolean {
 		return n % 2 == 0;

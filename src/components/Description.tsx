@@ -4,9 +4,6 @@ import { DescriptionProps } from '../interfaces/Description';
 import { colors } from '../styles/colors';
 
 export default class Description extends Component<DescriptionProps, never> {
-	constructor(props: DescriptionProps) {
-		super(props);
-	}
 
 	render(): JSX.Element {
 		return <Text style={styles.description}>{this.props.description}</Text>;

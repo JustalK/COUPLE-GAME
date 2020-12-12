@@ -5,9 +5,6 @@ import Windows from './Windows';
 import { colors } from '../styles/colors';
 
 export default class Project extends Component<ProjectsProps, never> {
-	constructor(props: ProjectsProps) {
-		super(props);
-	}
 
 	zoomProject(id: string): void {
 		this.props.updateIdProject(id);
