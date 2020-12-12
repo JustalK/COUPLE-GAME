@@ -20,9 +20,23 @@ import { ProjectsInformationProps } from '../interfaces/Projects';
 import { ListingProps, ListingStates } from '../interfaces/Listing';
 import { isGoingDown } from '../libs/utils';
 
+/**
+* Display the portfolio
+* @params {ListingProps} props The functions for switching between project
+* @return {JSX.Element} Display the portfolio
+**/
 export default class Portfolio extends Component<ListingProps, ListingStates> {
+
+	/**
+	* Binding the event when the user scroll down and reach the bottom
+	* @params {ListingProps} this The component
+	**/
 	isGoingDown = isGoingDown.bind(this);
 
+	/**
+	* The constructor and initializer of the state
+	* @params {ListingProps} props The functions for switching between project
+	**/
 	constructor(props: ListingProps) {
 		super(props);
 		this.state = {
@@ -39,23 +53,36 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 
 	}
 
+	/**
+	* When the component is mounted, this method is called once
+	* Load the page informations, the project and page limit
+	**/
 	async componentDidMount(): Promise<void> {
 		await this.getPageInformations();
 		await this.getProjectsInformations(0);
 		await this.getPageLimit();
 	}
 
+	/**
+	* Load the first page information
+	**/
 	async getPageInformations(): Promise<void> {
 		const infos: PagesInformationProps[] = await ApiPage.getPortfolioInformation();
 		this.setState({ informations: infos[0] });
 	}
 
+	/**
+	* Load the number of project max of the app
+	**/
 	async getPageLimit(): Promise<void> {
 		const total = await ApiProject.countProject();
 		const pageMax: number = total.total / 4;
 		this.setState({ pageLimit: pageMax });
 	}
 
+	/**
+	* Load the informations of a specific page and lock the scroll until everything is load
+	**/
 	async getProjectsInformations(page: number): Promise<void> {
 		const projects: ProjectsInformationProps[] = await ApiProject.getProject(page);
 		this.setState({
@@ -66,14 +93,26 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 		});
 	}
 
+	/**
+	* Check if the user has reach the bottom of the page
+	* @return {boolean} Return True if the user has load the last page
+	**/
 	endOfPage(): boolean {
 		return this.state.page + 1 > this.state.pageLimit;
 	}
 
+	/**
+	* Render the end of the page
+	* @return {JSX.Element} Display the end of a page
+	**/
 	renderEndOfPage(): JSX.Element {
 		return <Text style={stylePage.end}>You have reached the bottom of the page</Text>;
 	}
 
+	/**
+	* Display the listing of the page
+	* @return {JSX.Element} Display the listing of the page
+	**/
 	renderListing(): JSX.Element {
 		return (
 			<ScrollView
@@ -110,6 +149,10 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 		);
 	}
 
+	/**
+	* Display the listing of the page or the loading screen if everything is not load
+	* @return {JSX.Element} Display the listing of the page or the loading screen if everything is not load
+	**/
 	render(): JSX.Element {
 		return (
 			<View style={styleMain.pageContainer}>

@@ -1,3 +1,6 @@
+/**
+* Constants of the color for the application
+**/
 export const colors = {
 	darkBlue: '#111116',
 	clearBlue: '#1d1d23',

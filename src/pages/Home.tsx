@@ -11,7 +11,17 @@ import { HomeProps, HomeStates } from '../interfaces/Home';
 import ApiContact from '../services/ApiContact';
 import ApiJob from '../services/ApiJob';
 
+/**
+* Display the home of the app
+* @params {HomeProps} props The navigation informations
+* @return {JSX.Element} Display the home of the app
+**/
 export default class Home extends Component<HomeProps, HomeStates> {
+
+	/**
+	* The constructor and initializer of the state
+	* @params {HomeProps} props The navigation informations
+	**/
 	constructor(props: HomeProps) {
 		super(props);
 		this.state = {
@@ -22,6 +32,10 @@ export default class Home extends Component<HomeProps, HomeStates> {
 		};
 	}
 
+	/**
+	* When the component is mounted, this method is called once
+	* Load the identity and the jobs for the display
+	**/
 	async componentDidMount(): Promise<void> {
 		const identity = await ApiContact.getMyContact();
 		const jobs = await ApiJob.getJobs();
@@ -34,6 +48,10 @@ export default class Home extends Component<HomeProps, HomeStates> {
 		});
 	}
 
+	/**
+	* Render the home screen once the informations are loaded
+	* @params {JSX.Element} Display the home
+	**/
 	renderHome(): JSX.Element {
 		return (
 			<View>
@@ -48,6 +66,10 @@ export default class Home extends Component<HomeProps, HomeStates> {
 		);
 	}
 
+	/**
+	* Display the home or the loading screen
+	* return {JSX.Element} Display the home
+	**/
 	render(): JSX.Element {
 		return (
 			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('JustalK')}>
@@ -61,6 +83,9 @@ export default class Home extends Component<HomeProps, HomeStates> {
 	}
 }
 
+/**
+* Create the custom style for the home
+**/
 const styles = StyleSheet.create({
 	textStyle: {
 		margin: 0,

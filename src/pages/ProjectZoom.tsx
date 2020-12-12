@@ -12,9 +12,22 @@ import { SlideApiProps } from '../interfaces/Slide';
 import { colors } from '../styles/colors';
 import { isGoingDown } from '../libs/utils';
 
+/**
+* Display the html for a project
+* @params {ProjectZoomProps} props The project informations needed for the component
+* @return {JSX.Element} The html representing the project
+**/
 export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoomStates> {
+	/**
+	* Binding the event when the user scroll down and reach the bottom
+	* @params {ProjectZoomProps} this The component
+	**/
 	isGoingDown = isGoingDown.bind(this);
 
+	/**
+	* The constructor and initializer of the state
+	* @params {ProjectZoomProps} props The project informations needed for the component
+	**/
 	constructor(props: ProjectZoomProps) {
 		super(props);
 		this.state = {
@@ -26,10 +39,17 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		};
 	}
 
+	/**
+	* When the component is mounted, this method is called once
+	**/
 	async componentDidMount(): Promise<void> {
 		await this.loadProject(FIRST_ID_PROJECT);
 	}
 
+	/**
+	* Load the project and give the informations received to the state
+	* @params {string} idProject The id of the project to load
+	**/
 	async loadProject(idProject: string): Promise<void> {
 		const project = await ApiProject.getOneProject(idProject);
 		let slides: SlideApiProps[] = [];
@@ -47,29 +67,55 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		this.props.projectLoaded();
 	}
 
+	/**
+	* Load a slide of the project by id
+	* @params {string} idSlide The id of the slide to load
+	* @return {SlideApiProps} The slide object
+	**/
 	async loadSlide(idSlide: string): Promise<SlideApiProps> {
 		return ApiSlide.getOneSlide(idSlide);
 	}
 
+	/**
+	* Load the following slide and unlock the current loader before loading more
+	* @params {string} idSlide The id of the slide to load
+	* @return {SlideApiProps} The slide object
+	**/
 	async nextSlide(idSlide: string): Promise<void> {
 		const slides = await ApiSlide.getOneSlide(idSlide);
 		this.setState({ slides: [...this.state.slides, slides], loadMore: true });
 	}
 
+	/**
+	* Load when the id of the project has been update by the parent
+	* @params {ProjectZoomProps} prevProps The previous props of the project
+	**/
 	async componentDidUpdate(prevProps: ProjectZoomProps): Promise<void> {
 		if (this.props.idProject !== prevProps.idProject) {
 			await this.loadProject(this.props.idProject);
 		}
 	}
 
+	/**
+	* Check if we reach the last slide
+	* @return {boolean} True if we reach the last slide
+	**/
 	lastSlide(): boolean {
 		return this.state.slides.length === this.state.slidesId.length;
 	}
 
+	/**
+	* Message to show when the last page has been reached
+	* @return {JSX.Element} The message in a html element
+	**/
 	renderEndOfPage(): JSX.Element {
 		return <Text style={stylePage.end}>You have reached the bottom of the page</Text>;
 	}
 
+	/**
+	* Display of the project page
+	* @return {JSX.Element} Display the project page
+	**/
 	renderProject(): JSX.Element {
 		return (
 			<ScrollView
@@ -106,6 +152,11 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		);
 	}
 
+	/**
+	* Display the project zoom component
+	* It shows a loader before showing the content
+	* @params {JSX.Element} Display the project zoom
+	**/
 	render(): JSX.Element {
 		return (
 			<View style={styleMain.pageContainer}>
@@ -115,9 +166,3 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	loaderPadding: {
-		padding: 100,
-	},
-});

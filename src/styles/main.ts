@@ -1,6 +1,11 @@
+'use strict';
+
 import { StyleSheet } from 'react-native';
 import { colors } from './colors';
 
+/**
+* Create the style for the text element
+**/
 export const styleText = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -10,6 +15,9 @@ export const styleText = StyleSheet.create({
 	},
 });
 
+/**
+* Create the style for the container of the page
+**/
 export const styleMain = StyleSheet.create({
 	homeContainer: {
 		flex: 1,
@@ -28,6 +36,9 @@ export const styleMain = StyleSheet.create({
 	},
 });
 
+/**
+* Create the style for some element inside the page
+**/
 export const stylePage = StyleSheet.create({
 	end: {
 		fontSize: 20,

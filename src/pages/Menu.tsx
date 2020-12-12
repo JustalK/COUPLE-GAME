@@ -8,7 +8,17 @@ import { MenuProps, MenuStates } from '../interfaces/Menu';
 import { ProjectsMenuProps } from '../interfaces/Projects';
 import { Icon } from 'react-native-elements';
 
+/**
+* Display of the menu
+* params {MenuProps} props The methods for navigating to the right tabs and load the right project
+* @return Display the menu
+**/
 export default class Menu extends Component<MenuProps, MenuStates> {
+
+	/**
+	* The constructor and initializer of the state
+	* @params {MenuProps} props The methods for navigating to the right tabs and load the right project
+	**/
 	constructor(props: MenuProps) {
 		super(props);
 		this.state = {
@@ -17,12 +27,19 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 		};
 	}
 
+	/**
+	* When the component is mounted, this method is called once
+	**/
 	async componentDidMount(): Promise<void> {
 		const infos: ProjectsMenuProps[] = await ApiProject.getMenu();
 		const identity = await ApiContact.getMyContact();
 		this.setState({ projects: infos, email: identity.email });
 	}
 
+	/**
+	* Display the menu component
+	* @params {JSX.Element} Display the menu component
+	**/
 	render(): JSX.Element {
 		return (
 			<ScrollView>
@@ -57,6 +74,9 @@ export default class Menu extends Component<MenuProps, MenuStates> {
 	}
 }
 
+/**
+* Create the style for the menu
+**/
 const styles = StyleSheet.create({
 	section: {
 		marginTop: 50,
