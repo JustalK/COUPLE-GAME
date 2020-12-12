@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Text, StyleSheet, View, ScrollView, NativeScrollSize, NativeScrollPoint } from 'react-native';
 import Loading from '../components/Loading';
 import Slide from '../components/Slide';
-import Title from '../components/Title';
-import Description from '../components/Description';
+import TextCustom from '../components/TextCustom';
 import {FIRST_ID_PROJECT} from '../libs/constants';
 import { styleMain, stylePage } from '../styles/main';
 import ApiProject from '../services/ApiProject';
@@ -100,8 +99,8 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 				}}
 				style={styleMain.pagePadding}
 			>
-				<Title title={this.state.title} />
-				<Description description={this.state.description} />
+				<TextCustom isTitle={true} text={this.state.title} />
+				<TextCustom text={this.state.description} />
 				{this.state.slides.map((slide: SlideApiProps, index: number) => {
 					return (
 						<Slide

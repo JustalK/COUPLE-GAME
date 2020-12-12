@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import Windows from './Windows';
 import { SlideProps } from '../interfaces/Slide';
-import Description from './Description';
+import TextCustom from './TextCustom';
 
 export default class Slide extends Component<SlideProps, never> {
 
@@ -10,8 +10,8 @@ export default class Slide extends Component<SlideProps, never> {
 		return (
 			<View>
 				<Windows title={this.props.title} image={this.props.image} />
-				<Description description={this.props.firstText} />
-				<Description description={this.props.secondText} />
+				<TextCustom text={this.props.firstText} />
+				<TextCustom text={this.props.secondText} />
 			</View>
 		);
 	}

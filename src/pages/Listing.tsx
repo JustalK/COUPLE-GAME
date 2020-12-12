@@ -13,8 +13,7 @@ import { styleMain, stylePage } from '../styles/main';
 import { colors } from '../styles/colors';
 import Project from '../components/Project';
 import Loading from '../components/Loading';
-import Title from '../components/Title';
-import Description from '../components/Description';
+import TextCustom from '../components/TextCustom';
 import ApiPage from '../services/ApiPage';
 import ApiProject from '../services/ApiProject';
 import { PagesInformationProps } from '../interfaces/Pages';
@@ -104,8 +103,8 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 				}}
 				style={styleMain.pagePadding}
 			>
-				<Title title={this.state.informations.title} />
-				<Description description={this.state.informations.description} />
+				<TextCustom isTitle={true} text={this.state.informations.title} />
+				<TextCustom text={this.state.informations.description} />
 				{this.state.projects.map((project, index) => {
 					return (
 						<Project
