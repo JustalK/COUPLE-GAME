@@ -6,7 +6,7 @@
 
 ![Last version](https://img.shields.io/github/v/tag/justalk/portfolio-app.svg?style=flat-square)
 [![Travis](https://img.shields.io/travis/com/justalk/portfolio-app.svg?style=flat-square)](https://travis-ci.com/github/JustalK/portfolio-app)
-[![Coverage Status](https://coveralls.io/repos/github/JustalK/PORTFOLIO-APP/badge.svg?branch=master&style=flat-square)](https://coveralls.io/github/JustalK/PORTFOLIO-APP?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/JustalK/PORTFOLIO-APP/badge.svg?branch=master)](https://coveralls.io/github/JustalK/PORTFOLIO-APP?branch=master)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/74468f5076948fc994c8/maintainability)](https://codeclimate.com/github/JustalK/PORTFOLIO-APP/maintainability)
 
 A project for presenting my professional work to the world in an app published on Google Store (in verification). As a fullstack developer, I have coded both side of the application. The app has been made with `React Native` and `Typescript` the backend is made with `Express` and `MongoDB`.
