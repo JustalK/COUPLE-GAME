@@ -70,18 +70,6 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		return <Text style={stylePage.end}>You have reached the bottom of the page</Text>;
 	}
 
-	renderLoadingMore(): JSX.Element {
-		return (
-			<View style={styles.loaderPadding}>
-				<ActivityIndicator size="large" color={colors.white} />
-			</View>
-		);
-	}
-
-	renderLoading(): JSX.Element {
-		return <Loading />;
-	}
-
 	renderProject(): JSX.Element {
 		return (
 			<ScrollView
@@ -112,7 +100,7 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 						/>
 					);
 				})}
-				{this.state.loadMore && this.renderLoadingMore()}
+				{this.state.loadMore && (<Loading />)}
 				{this.lastSlide() && this.renderEndOfPage()}
 			</ScrollView>
 		);
@@ -121,7 +109,7 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 	render(): JSX.Element {
 		return (
 			<View style={styleMain.pageContainer}>
-				{this.props.loadingProject && this.renderLoading()}
+				{this.props.loadingProject && (<Loading isScreen={true} />)}
 				{!this.props.loadingProject && this.renderProject()}
 			</View>
 		);

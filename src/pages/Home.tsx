@@ -48,15 +48,11 @@ export default class Home extends Component<HomeProps, HomeStates> {
 		);
 	}
 
-	renderLoading(): JSX.Element {
-		return <Loading />;
-	}
-
 	render(): JSX.Element {
 		return (
 			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('JustalK')}>
 				<View style={styleMain.homeContainer}>
-					{this.state.loading && this.renderLoading()}
+					{this.state.loading && (<Loading isScreen={true} />)}
 					{!this.state.loading && this.renderHome()}
 					<StatusBar style="auto" hidden />
 				</View>

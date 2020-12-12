@@ -5,7 +5,6 @@ import {
 	Text,
 	View,
 	ScrollView,
-	StyleSheet,
 	NativeScrollSize,
 	NativeScrollPoint,
 } from 'react-native';
@@ -75,18 +74,6 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 		return <Text style={stylePage.end}>You have reached the bottom of the page</Text>;
 	}
 
-	renderLoadingMore(): JSX.Element {
-		return (
-			<View style={styles.loaderPadding}>
-				<ActivityIndicator size="large" color={colors.white} />
-			</View>
-		);
-	}
-
-	renderLoading(): JSX.Element {
-		return <Loading />;
-	}
-
 	renderListing(): JSX.Element {
 		return (
 			<ScrollView
@@ -117,7 +104,7 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 						></Project>
 					);
 				})}
-				{this.state.loadMore && this.renderLoadingMore()}
+				{this.state.loadMore && (<Loading />)}
 				{this.endOfPage() && this.renderEndOfPage()}
 			</ScrollView>
 		);
@@ -126,16 +113,10 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 	render(): JSX.Element {
 		return (
 			<View style={styleMain.pageContainer}>
-				{this.state.loading && this.renderLoading()}
+				{this.state.loading && (<Loading isScreen={true} />)}
 				{!this.state.loading && this.renderListing()}
 				<StatusBar style="auto" hidden />
 			</View>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	loaderPadding: {
-		padding: 100,
-	},
-});
