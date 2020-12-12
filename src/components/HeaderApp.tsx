@@ -5,7 +5,16 @@ import { HeaderAppProps, HeaderAppStates } from '../interfaces/HeaderApp';
 import { colors } from '../styles/colors';
 import { Header } from 'react-native-elements';
 
+/**
+* Display the header
+* @params {HeaderAppProps} props The information for the title and the navigation
+**/
 export default class HeaderApp extends Component<HeaderAppProps, HeaderAppStates> {
+
+	/**
+	* The constructor and initializer of the state
+	* @params {HeaderAppProps} The information for the title and the navigation
+	**/
 	constructor(props: HeaderAppProps) {
 		super(props);
 		this.state = {
@@ -13,15 +22,26 @@ export default class HeaderApp extends Component<HeaderAppProps, HeaderAppStates
 		}
 	}
 
+	/**
+	* When the component is mounted, this method is called once
+	* Load the information about my identity
+	**/
 	async componentDidMount(): Promise<void> {
 		const identity = await ApiContact.getMyContact();
 		this.setState({ email: identity.email });
 	}
 
+	/**
+	* Send an event for going back to the home
+	**/
 	backToHome(): void {
 		this.props.navigation.navigate('Home');
 	}
 
+	/**
+	* Display the header
+	* @return {JSX.Element} Display the header
+	**/
 	render(): JSX.Element {
 		return (
 			<Header
@@ -47,6 +67,9 @@ export default class HeaderApp extends Component<HeaderAppProps, HeaderAppStates
 	}
 }
 
+/**
+* Create the custom style for the header
+**/
 const styles = StyleSheet.create({
 	header: {
 		backgroundColor: colors.darkBlue,

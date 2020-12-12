@@ -3,8 +3,16 @@ import { StyleSheet, Text, Image, View } from 'react-native';
 import { WindowsProps } from '../interfaces/Windows';
 import { colors } from '../styles/colors';
 
+/**
+* Display the windows
+* @params {WindowsProps} props The information needed for the windows
+**/
 export default class Windows extends Component<WindowsProps, never> {
 
+	/**
+	* Display the windows
+	* @return The windows
+	**/
 	render(): JSX.Element {
 		return (
 			<View style={styles.project}>
@@ -15,6 +23,9 @@ export default class Windows extends Component<WindowsProps, never> {
 	}
 }
 
+/**
+* Create the custom style for the windows
+**/
 const styles = StyleSheet.create({
 	project: {
 		borderWidth: 1,

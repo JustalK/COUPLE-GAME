@@ -4,8 +4,16 @@ import Windows from './Windows';
 import { SlideProps } from '../interfaces/Slide';
 import TextCustom from './TextCustom';
 
+/**
+* Display a slide
+* @params {SlideProps} props display the slide
+**/
 export default class Slide extends Component<SlideProps, never> {
 
+	/**
+	* Display a slide
+	* @return {JSX.Element} Display a slide
+	**/
 	render(): JSX.Element {
 		return (
 			<View>

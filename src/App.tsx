@@ -12,6 +12,9 @@ import Portfolio from './pages/Portfolio';
 import * as Font from 'expo-font';
 import { AppStates } from './interfaces/App';
 
+/**
+* Create the slide effect between the screen
+**/
 const forSlide = ({ current, next, inverted, layouts: { screen } }: StackCardInterpolationProps) => {
 	const progress = Animated.add(
 		current.progress.interpolate({
@@ -50,6 +53,9 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }: StackCardInt
 	};
 };
 
+/**
+* The custom font to load
+**/
 const customFonts = {
 	LatoRegular: require('../assets/fonts/Lato-Regular.ttf'),
 	LatoBold: require('../assets/fonts/Lato-Bold.ttf'),
@@ -57,7 +63,14 @@ const customFonts = {
 	Heebo: require('../assets/fonts/Heebo-Bold.ttf'),
 };
 
+/**
+* Entry point of the app, display the home by default
+**/
 export default class App extends Component<unknown, AppStates> {
+
+	/**
+	* The constructor and initializer of the state
+	**/
 	constructor(props: unknown) {
 		super(props);
 		this.state = {
@@ -65,11 +78,19 @@ export default class App extends Component<unknown, AppStates> {
 		};
 	}
 
+	/**
+	* When the component is mounted, this method is called once
+	* Load the font and notify the state when loaded
+	**/
 	async componentDidMount(): Promise<void> {
 		await Font.loadAsync(customFonts);
 		this.setState({ fontsLoaded: true });
 	}
 
+	/**
+	* Display the app
+	* @return {JSX.Element} The app
+	**/
 	render(): JSX.Element {
 		if (this.state.fontsLoaded) {
 			return (
