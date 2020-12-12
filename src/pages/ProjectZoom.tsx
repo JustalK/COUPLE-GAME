@@ -130,15 +130,6 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 }
 
 const styles = StyleSheet.create({
-	end: {
-		fontSize: 20,
-		fontFamily: 'LatoLight',
-		textAlign: 'center',
-		color: colors.cyan,
-		alignSelf: 'center',
-		marginTop: 50,
-		marginBottom: 100,
-	},
 	loaderPadding: {
 		padding: 100,
 	},
