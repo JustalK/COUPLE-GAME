@@ -11,6 +11,7 @@ import ApiSlide from '../services/ApiSlide';
 import { ProjectZoomProps, ProjectZoomStates } from '../interfaces/ProjectZoom';
 import { SlideApiProps } from '../interfaces/Slide';
 import { colors } from '../styles/colors';
+import { isGoingDown } from '../libs/utils';
 
 export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoomStates> {
 	constructor(props: ProjectZoomProps) {
@@ -22,6 +23,8 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 			slidesId: [],
 			slides: [],
 		};
+
+		this.isGoingDown = isGoingDown.bind(this);
 	}
 
 	async componentDidMount(): Promise<void> {
@@ -60,19 +63,6 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 		}
 	}
 
-	isGoingDown(
-		layoutMeasurement: NativeScrollSize,
-		contentOffset: NativeScrollPoint,
-		contentSize: NativeScrollSize,
-	): boolean {
-		if (this.state.loadMore && layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000) {
-			this.setState({ loadMore: false });
-			return true;
-		}
-
-		return false;
-	}
-
 	lastSlide(): boolean {
 		return this.state.slides.length === this.state.slidesId.length;
 	}
@@ -98,13 +88,12 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 			<ScrollView
 				onScroll={({ nativeEvent }) => {
 					if (
-						this.isGoingDown(
-							nativeEvent.layoutMeasurement,
-							nativeEvent.contentOffset,
-							nativeEvent.contentSize,
-						) &&
+						this.isGoingDown(nativeEvent.layoutMeasurement,
+						nativeEvent.contentOffset,
+						nativeEvent.contentSize) &&
 						!this.lastSlide()
 					) {
+						console.log('boom');
 						const nextSlide = this.state.slides.length;
 						this.nextSlide(this.state.slidesId[nextSlide]);
 					}

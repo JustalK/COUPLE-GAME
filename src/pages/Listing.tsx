@@ -20,6 +20,7 @@ import ApiProject from '../services/ApiProject';
 import { PagesInformationProps } from '../interfaces/Pages';
 import { ProjectsInformationProps } from '../interfaces/Projects';
 import { ListingProps, ListingStates } from '../interfaces/Listing';
+import { isGoingDown } from '../libs/utils';
 
 export default class Portfolio extends Component<ListingProps, ListingStates> {
 	constructor(props: ListingProps) {
@@ -35,6 +36,8 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 			pageLimit: 1,
 			page: 0,
 		};
+
+		this.isGoingDown = isGoingDown.bind(this);
 	}
 
 	async componentDidMount(): Promise<void> {
@@ -64,19 +67,6 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 		});
 	}
 
-	isGoingDown(
-		layoutMeasurement: NativeScrollSize,
-		contentOffset: NativeScrollPoint,
-		contentSize: NativeScrollSize,
-	): boolean {
-		if (this.state.loadMore && layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000) {
-			this.setState({ loadMore: false });
-			return true;
-		}
-
-		return false;
-	}
-
 	endOfPage(): boolean {
 		return this.state.page + 1 > this.state.pageLimit;
 	}
@@ -102,11 +92,9 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 			<ScrollView
 				onScroll={({ nativeEvent }) => {
 					if (
-						this.isGoingDown(
-							nativeEvent.layoutMeasurement,
-							nativeEvent.contentOffset,
-							nativeEvent.contentSize,
-						) &&
+						this.isGoingDown(nativeEvent.layoutMeasurement,
+						nativeEvent.contentOffset,
+						nativeEvent.contentSize) &&
 						!this.endOfPage()
 					) {
 						const nextPage = this.state.page + 1;

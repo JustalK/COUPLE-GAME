@@ -18,6 +18,8 @@
     "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "@types/jest": "^26.0.19",
+    "@types/react-test-renderer": "^17.0.0",
     "axios": "^0.21.0",
     "coveralls": "^3.1.0",
     "eslint-config-prettier": "^7.0.0",
