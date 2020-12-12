@@ -9,7 +9,7 @@ import {
 	NativeScrollSize,
 	NativeScrollPoint,
 } from 'react-native';
-import { styleMain } from '../styles/main';
+import { styleMain, stylePage } from '../styles/main';
 import { colors } from '../styles/colors';
 import Project from '../components/Project';
 import Loading from '../components/Loading';
@@ -73,7 +73,7 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 	}
 
 	renderEndOfPage(): JSX.Element {
-		return <Text style={styles.end}>You have reached the bottom of the page</Text>;
+		return <Text style={stylePage.end}>You have reached the bottom of the page</Text>;
 	}
 
 	renderLoadingMore(): JSX.Element {
@@ -136,15 +136,6 @@ export default class Portfolio extends Component<ListingProps, ListingStates> {
 }
 
 const styles = StyleSheet.create({
-	end: {
-		fontSize: 20,
-		fontFamily: 'LatoLight',
-		textAlign: 'center',
-		color: colors.cyan,
-		alignSelf: 'center',
-		marginTop: 50,
-		marginBottom: 100,
-	},
 	loaderPadding: {
 		padding: 100,
 	},

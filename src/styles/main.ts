@@ -27,3 +27,15 @@ export const styleMain = StyleSheet.create({
 		padding: 20,
 	},
 });
+
+export const stylePage = StyleSheet.create({
+	end: {
+		fontSize: 20,
+		fontFamily: 'LatoLight',
+		textAlign: 'center',
+		color: colors.cyan,
+		alignSelf: 'center',
+		marginTop: 50,
+		marginBottom: 100,
+	}
+});

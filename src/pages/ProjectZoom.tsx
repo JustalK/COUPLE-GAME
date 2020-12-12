@@ -5,7 +5,7 @@ import Slide from '../components/Slide';
 import Title from '../components/Title';
 import Description from '../components/Description';
 import {FIRST_ID_PROJECT} from '../libs/constants';
-import { styleMain } from '../styles/main';
+import { styleMain, stylePage } from '../styles/main';
 import ApiProject from '../services/ApiProject';
 import ApiSlide from '../services/ApiSlide';
 import { ProjectZoomProps, ProjectZoomStates } from '../interfaces/ProjectZoom';
@@ -68,7 +68,7 @@ export default class ProjectZoom extends Component<ProjectZoomProps, ProjectZoom
 	}
 
 	renderEndOfPage(): JSX.Element {
-		return <Text style={styles.end}>You have reached the bottom of the page</Text>;
+		return <Text style={stylePage.end}>You have reached the bottom of the page</Text>;
 	}
 
 	renderLoadingMore(): JSX.Element {
