@@ -15,6 +15,49 @@ The entire project follow the official convention for JS. Also, the project is c
 
 This project is linked to my other repository [PORTFOLIO](https://github.com/JustalK/PORTFOLIO). It's where I have designed the backend.
 
+## Organization
+
+The following describe how the project is structured. It's an easy way for discovering the project and the way I organize the code.
+
+#### Flowchart of the app
+
+![Alt text](documentation/process/flowchart.png?raw=true "PORTFOLIO-Flowchart")
+
+#### Organization of the folder
+
+| Folder's Name | Description of the folder                        |
+| :------------ | :----------------------------------------------- |
+| components    | Regroup the reusable components                  |
+| definitions   | Typescript custom definitions                    |
+| interfaces    | Regroup the interfaces for Typescript            |
+| libs          | Regroup global functions and constants           |
+| pages         | Regroup the screens of the App                   |
+| services      | Regroup the call to the Api                      |
+| styles        | Regroup the less styles of the App               |
+
+#### Dependencies
+
+| Package's Name             | Description                                              |
+| :------------------------- | :------------------------------------------------------- |
+| axios                      | I use this package for calling the rest API (my backend) |
+| expo                       | I use expo for easy testing through my real device. I also use it for creating a apk build or app-bundle                                                  |
+| expo-font                  | Use for having access to the custom font inside expo     |
+| expo-status-bar            | Use for having access to the status bar inside expo      |
+| react                      | For being able to use the react technology               |
+| react-dom                  | Use for having access to the DOM of react                |
+| react-native               | Use for having access to android functionalities         |
+| react-native-tab-view      | Use for having a beautiful way to handle the tabs system between the different screen                                                                    |
+| @babel                     | Use for transpiling the entire code                      |
+| @types/x                   | For adding certain definition for Typescript             |
+| babel-eslint               | Pass the result of babel into eslint                     |
+| eslint                     | The linter of the entire code                            |
+| eslint-plugin-react        | Add the linting rules of react to the eslint             |
+| eslint-plugin-react-native | Add the linting rules of react-native to the eslint      |
+| eslint-plugin-prettier     | Add the linting rules of prettier to the eslint          |
+| typescript                 | For typing JS and avoiding future error                  |
+| prettier                   | For formatting the entire code                           |
+| eslint-config-prettier     | For adding the recommended config of prettier            |
+
 ## Commands
 
 #### Developing
@@ -46,45 +89,6 @@ For building an apk or app-bundle that could be use on Google Store or Apple Sto
 npm run build-android
 npm run build-ios
 ```
-
-## Organization
-
-The following describe how the project is structured. It's an easy way for discovering the project and the way I organize the code.
-
-#### Dependencies
-
-| Package's Name             | Description                                              |
-| :------------------------- | :------------------------------------------------------- |
-| axios                      | I use this package for calling the rest API (my backend) |
-| expo                       | I use expo for easy testing through my real device. I also use it for creating a apk build or app-bundle                                                  |
-| expo-font                  | Use for having access to the custom font inside expo     |
-| expo-status-bar            | Use for having access to the status bar inside expo      |
-| react                      | For being able to use the react technology               |
-| react-dom                  | Use for having access to the DOM of react                |
-| react-native               | Use for having access to android functionalities         |
-| react-native-tab-view      | Use for having a beautiful way to handle the tabs system between the different screen                                                                    |
-| @babel                     | Use for transpiling the entire code                      |
-| @types/x                   | For adding certain definition for Typescript             |
-| babel-eslint               | Pass the result of babel into eslint                     |
-| eslint                     | The linter of the entire code                            |
-| eslint-plugin-react        | Add the linting rules of react to the eslint             |
-| eslint-plugin-react-native | Add the linting rules of react-native to the eslint      |
-| eslint-plugin-prettier     | Add the linting rules of prettier to the eslint          |
-| typescript                 | For typing JS and avoiding future error                  |
-| prettier                   | For formatting the entire code                           |
-| eslint-config-prettier     | For adding the recommended config of prettier            |
-
-#### Organization of the folder
-
-| Folder's Name | Description of the folder                        |
-| :------------ | :----------------------------------------------- |
-| components    | Regroup the reusable components                  |
-| definitions   | Typescript custom definitions                    |
-| interfaces    | Regroup the interfaces for Typescript            |
-| libs          | Regroup global functions and constants           |
-| pages         | Regroup the screens of the App                   |
-| services      | Regroup the call to the Api                      |
-| styles        | Regroup the less styles of the App               |
 
 ## License
 
