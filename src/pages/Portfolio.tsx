@@ -25,20 +25,12 @@ export default class Portfolio extends Component<PortfolioProps, PortfolioStates
 	}
 
 	async componentDidMount(): Promise<void> {
-		await this.getPageInformations();
-		await this.getProjectsInformations(0);
-	}
-
-	async getPageInformations(): Promise<void> {
 		const infos: PagesInformationProps[] = await ApiPage.getPortfolioInformation();
-		this.setState({ informations: infos[0] });
-	}
-
-	async getProjectsInformations(page: number): Promise<void> {
-		const projects: ProjectsInformationProps[] = await ApiProject.getProject(page);
+		const projects: ProjectsInformationProps[] = await ApiProject.getProject(0);
 		this.setState({
+			informations: infos[0],
 			projects: [...this.state.projects, ...projects],
-			page: page,
+			page: 0,
 			loadMore: true,
 		});
 	}
