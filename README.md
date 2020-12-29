@@ -9,7 +9,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/JustalK/PORTFOLIO-APP/badge.svg?branch=master)](https://coveralls.io/github/JustalK/PORTFOLIO-APP?branch=master)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/74468f5076948fc994c8/maintainability)](https://codeclimate.com/github/JustalK/PORTFOLIO-APP/maintainability)
 
-A project for presenting my professional work to the world in an app published on Google Store (in verification). As a fullstack developer, I have coded both side of the application. The app has been made with `React Native` and `Typescript` the backend is made with `Express` and `MongoDB`.
+[Voir sur Google Play Store](https://play.google.com/store/apps/details?id=com.justalk.portfolio)
+
+A project for presenting my professional work to the world in an app published on [Google Store](https://play.google.com/store/apps/details?id=com.justalk.portfolio). As a fullstack developer, I have coded both side of the application. The app has been made with `React Native` and `Typescript` the backend is made with `Express` and `MongoDB`.
 
 The entire project follow the official convention for JS. Also, the project is checked by `travis` and the test of `Jest` for checking the continuity. Finally, the robustness of the project is assured by `Coveralls` who checked the coverage of the test.
 
