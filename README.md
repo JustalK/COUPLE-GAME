@@ -1,6 +1,4 @@
-![Alt text](documentation/imgs/1.jpg?raw=true "PORTFOLIO-Flowchart")
-![Alt text](documentation/imgs/2.jpg?raw=true "PORTFOLIO-Flowchart")
-![Alt text](documentation/imgs/3.jpg?raw=true "PORTFOLIO-Flowchart")
+![Alt text](documentation/presentation/3d_small.png?raw=true "PORTFOLIO-Flowchart")
 
 # PORTFOLIO-APP
 
